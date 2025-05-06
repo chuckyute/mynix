@@ -57,6 +57,7 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+    vimdiffAlias = true;
   };
 
   # Home Manager can also manage your environment variables through
