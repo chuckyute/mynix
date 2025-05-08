@@ -17,12 +17,14 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
+  fonts.fontconfig.enable = true
   home.packages = [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    pkgs.nerd-fonts.code-new-roman
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -53,63 +55,24 @@
     userEmail = "charlieyoung0807@gmail.com";
   };
 
-  programs.neovim =
-    let
-      toLua = str: "lua << EOF\n${str}\nEOF\n";
-      toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-    in
-    {
+  programs.neovim = {
     enable = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
     extraPackages = with pkgs; [
+      nerd-fonts.code-new-roman
       lua-language-server
-      nixd
-
-      xclip
       wl-clipboard
     ];
-
     plugins = with pkgs.vimPlugins; [
-      neodev-nvim
-      {
-        plugin = nvim-lspconfig;
-        config = toLuaFile ./nvim/plugin/lsp.lua;
-      }
-      {
-        plugin = comment-nvim;
-        config = toLua "require(\"Comment\").setup()";
-      }
-      {
-        plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
-      }
-      cmp-nvim-lsp
-      {
-        plugin = nvim-cmp;
-        config = toLuaFile ./nvim/plugin/cmp.lua;
-      }
-      {
-        plugin = telescope-nvim;
-        config = toLuaFile ./nvim/plugin/telescope.lua;
-      }
+      lazy-nvim
+      # telescope plugins
+      plenary-nvim
       telescope-fzf-native-nvim
-      friendly-snippets
-      {
-        plugin = (nvim-treesitter.withPlugins (p: [
-          p.tree-sitter-nix
-          p.tree-sitter-vim
-          p.tree-sitter-bash
-          p.tree-sitter-lua
-          p.tree-sitter-python
-          p.tree-sitter-json
-        ]));
-        config = toLuaFile ./nvim/plugin/treesitter.lua;
-      }
-      vim-nix
-    ];
+      telescope-ui-select
+      nvim-web-devicons
 
+      #lazydev-nvim
+
+    ];
     extraLuaConfig = ''
       ${builtins.readFile ./nvim/options.lua}
     '';
