@@ -147,27 +147,43 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 -- Create an autocommand group for LSP setup
 local lsp_setup_group = vim.api.nvim_create_augroup("LspSetup", { clear = true })
 
--- Set up Lua LSP only when a Lua file is opened
 vim.api.nvim_create_autocmd("FileType", {
 	group = lsp_setup_group,
 	pattern = "lua",
 	callback = function()
 		-- Use a flag to ensure we only set up lua_ls once
 		if not vim.g.lua_ls_initialized then
-			-- Skip lazydev and just configure lua_ls directly for now
-			-- We'll debug lazydev separately
+			-- Standard Lua LSP setup without lazydev
 			require("lspconfig").lua_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 				settings = {
 					Lua = {
+						runtime = {
+							-- Tell the language server which version of Lua you're using
+							version = "LuaJIT",
+						},
 						diagnostics = {
-							globals = { "vim" },
+							-- Get the language server to recognize the `vim` global
+							globals = {
+								"vim",
+								-- Add other Neovim globals that may be needed
+								"describe",
+								"it",
+								"before_each",
+								"after_each", -- For busted tests
+								"awesome",
+								"client",
+								"root",
+								"screen", -- For AwesomeWM if applicable
+							},
 						},
 						workspace = {
+							-- Make the server aware of Neovim runtime files
 							library = vim.api.nvim_get_runtime_file("", true),
 							checkThirdParty = false,
 						},
+						-- Do not send telemetry data
 						telemetry = {
 							enable = false,
 						},
@@ -176,32 +192,6 @@ vim.api.nvim_create_autocmd("FileType", {
 			})
 
 			vim.g.lua_ls_initialized = true
-
-			-- Try to set up lazydev separately to isolate the error
-			-- This way at least lua_ls will work if lazydev fails
-			vim.defer_fn(function()
-				local status, err = pcall(function()
-					require("lazydev").setup({
-						library = {
-							plugins = { "nvim-dap-ui" },
-							types = true,
-						},
-					})
-				end)
-
-				if not status then
-					-- Print error to diagnostics
-					vim.api.nvim_echo({
-						{ "LazyDev setup failed: " .. tostring(err), "ErrorMsg" },
-					}, true, {})
-
-					-- Also write to log file for debugging
-					vim.fn.writefile(
-						{ "LazyDev setup error: " .. tostring(err) },
-						vim.fn.stdpath("cache") .. "/lazydev_error.log"
-					)
-				end
-			end, 100) -- Small delay to ensure lua_ls is set up first
 		end
 	end,
 })
@@ -217,6 +207,7 @@ vim.api.nvim_create_autocmd("FileType", {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
+
 			vim.g.nixd_initialized = true
 		end
 	end,
