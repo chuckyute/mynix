@@ -61,6 +61,7 @@
       nerd-fonts.code-new-roman
       ripgrep
       lua-language-server
+      nixd
       wl-clipboard
     ];
     plugins = with pkgs.vimPlugins; [
@@ -73,9 +74,10 @@
       nvim-web-devicons
       telescope-nvim
       # lsp plugins
-      nvim-lspconfig
       fidget-nvim
       lazydev-nvim
+      cmp-nvim-lsp
+      nvim-lspconfig
 
     ];
     extraLuaConfig = ''
