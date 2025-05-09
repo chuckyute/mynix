@@ -154,15 +154,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		-- Use a flag to ensure we only set up lua_ls once
 		if not vim.g.lua_ls_initialized then
-			-- Initialize lazydev specifically for Lua development
-			require("lazydev").setup({
-				library = {
-					plugins = { "nvim-dap-ui" },
-					types = true,
-				},
-			})
-
-			-- Setup Lua LSP
+			-- Skip lazydev and just configure lua_ls directly for now
+			-- We'll debug lazydev separately
 			require("lspconfig").lua_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -181,7 +174,34 @@ vim.api.nvim_create_autocmd("FileType", {
 					},
 				},
 			})
+
 			vim.g.lua_ls_initialized = true
+
+			-- Try to set up lazydev separately to isolate the error
+			-- This way at least lua_ls will work if lazydev fails
+			vim.defer_fn(function()
+				local status, err = pcall(function()
+					require("lazydev").setup({
+						library = {
+							plugins = { "nvim-dap-ui" },
+							types = true,
+						},
+					})
+				end)
+
+				if not status then
+					-- Print error to diagnostics
+					vim.api.nvim_echo({
+						{ "LazyDev setup failed: " .. tostring(err), "ErrorMsg" },
+					}, true, {})
+
+					-- Also write to log file for debugging
+					vim.fn.writefile(
+						{ "LazyDev setup error: " .. tostring(err) },
+						vim.fn.stdpath("cache") .. "/lazydev_error.log"
+					)
+				end
+			end, 100) -- Small delay to ensure lua_ls is set up first
 		end
 	end,
 })
