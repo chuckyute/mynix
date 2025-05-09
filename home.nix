@@ -59,25 +59,26 @@
     enable = true;
     extraPackages = with pkgs; [
       nerd-fonts.code-new-roman
-	  ripgrep
+      ripgrep
       lua-language-server
       wl-clipboard
     ];
     plugins = with pkgs.vimPlugins; [
-	  comment-nvim
+      comment-nvim
       lazy-nvim
       # telescope plugins
       plenary-nvim
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
       nvim-web-devicons
-
-      #lazydev-nvim
+      # lsp plugins
+      nvim-lspconfig
+      fidget-nvim
+      lazydev-nvim
 
     ];
     extraLuaConfig = ''
-      ${builtins.readFile ./nvim/options.lua}
-      ${builtins.readFile ./nvim/plugins.lua}
+      ${builtins.readFile ./nvim/init.lua}
     '';
   };
 

@@ -16,3 +16,5 @@ vim.o.updatetime = 250
 vim.o.termguicolors = true
 
 vim.o.mouse = "a"
+
+require("plugins")
