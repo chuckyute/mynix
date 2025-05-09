@@ -78,10 +78,18 @@
 
     ];
     extraLuaConfig = ''
-      ${builtins.readFile ./nvim/init.lua}
+      require("options")
     '';
   };
 
+  xdg.configFile =
+    let
+      # Read all files in your nvim directory
+      nvimFiles = builtins.readDir ./nvim;
+      # Create a set of file mappings
+      makeEntry = name: _: { "nvim/lua/${name}".source = ./nvim + "/${name}"; }
+    in
+      lib.foldl lib.recursiveUpdate {} (lib.mapAttrsToList makeEntry nvimFiles);
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
