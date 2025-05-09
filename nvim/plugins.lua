@@ -79,136 +79,49 @@ map("<leader>sn", function()
 	builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, "[S]earch [N]eovim files")
 
--- Define a function to set up LSP for specific filetypes
--- Define our LSP on_attach function that will be used for all servers
-local on_attach = function(client, bufnr)
-	-- Common keymaps
-	local bufmap = function(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+local on_attach = function(_, bufnr)
+	local bufmap = function(keys, func)
+		vim.keymap.set("n", keys, func, { buffer = bufnr })
 	end
 
-	-- Standard LSP keymaps
-	bufmap("<leader>r", vim.lsp.buf.rename, "Rename")
-	bufmap("<leader>a", vim.lsp.buf.code_action, "Code Action")
-	bufmap("gd", vim.lsp.buf.definition, "Go to Definition")
-	bufmap("gD", vim.lsp.buf.declaration, "Go to Declaration")
-	bufmap("gI", vim.lsp.buf.implementation, "Go to Implementation")
-	bufmap("<leader>D", vim.lsp.buf.type_definition, "Type Definition")
-	bufmap("gr", require("telescope.builtin").lsp_references, "Find References")
-	bufmap("<leader>s", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-	bufmap("<leader>S", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
-	bufmap("K", vim.lsp.buf.hover, "Hover Documentation")
+	bufmap("<leader>r", vim.lsp.buf.rename)
+	bufmap("<leader>a", vim.lsp.buf.code_action)
 
-	-- Add Format command
+	bufmap("gd", vim.lsp.buf.definition)
+	bufmap("gD", vim.lsp.buf.declaration)
+	bufmap("gI", vim.lsp.buf.implementation)
+	bufmap("<leader>D", vim.lsp.buf.type_definition)
+
+	bufmap("gr", require("telescope.builtin").lsp_references)
+	bufmap("<leader>s", require("telescope.builtin").lsp_document_symbols)
+	bufmap("<leader>S", require("telescope.builtin").lsp_dynamic_workspace_symbols)
+
+	bufmap("K", vim.lsp.buf.hover)
+
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		vim.lsp.buf.format()
 	end, {})
-
-	-- Document highlighting on cursor hold
-	if client and client.server_capabilities.documentHighlightProvider then
-		local highlight_augroup = vim.api.nvim_create_augroup("lsp-document-highlight-" .. bufnr, { clear = true })
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			buffer = bufnr,
-			group = highlight_augroup,
-			callback = vim.lsp.buf.document_highlight,
-		})
-
-		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			buffer = bufnr,
-			group = highlight_augroup,
-			callback = vim.lsp.buf.clear_references,
-		})
-
-		vim.api.nvim_create_autocmd("LspDetach", {
-			buffer = bufnr,
-			group = vim.api.nvim_create_augroup("lsp-detach-" .. bufnr, { clear = true }),
-			callback = function()
-				vim.lsp.buf.clear_references()
-				vim.api.nvim_clear_autocmds({ group = highlight_augroup })
-			end,
-		})
-	end
-
-	-- Inlay hints (Neovim >= 0.10.0)
-	if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-		-- Toggle inlay hints with <leader>th
-		bufmap("<leader>th", function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(bufnr), {
-				bufnr = bufnr,
-			})
-		end, "Toggle Inlay Hints")
-	end
 end
 
--- Set up capabilities once, outside of the FileType callbacks
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
--- Create an autocommand group for LSP setup
-local lsp_setup_group = vim.api.nvim_create_augroup("LspSetup", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-	group = lsp_setup_group,
-	pattern = "lua",
-	callback = function()
-		-- Use a flag to ensure we only set up lua_ls once
-		if not vim.g.lua_ls_initialized then
-			-- Standard Lua LSP setup without lazydev
-			require("lspconfig").lua_ls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						runtime = {
-							-- Tell the language server which version of Lua you're using
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							-- Get the language server to recognize the `vim` global
-							globals = {
-								"vim",
-								-- Add other Neovim globals that may be needed
-								"describe",
-								"it",
-								"before_each",
-								"after_each", -- For busted tests
-								"awesome",
-								"client",
-								"root",
-								"screen", -- For AwesomeWM if applicable
-							},
-						},
-						workspace = {
-							-- Make the server aware of Neovim runtime files
-							library = vim.api.nvim_get_runtime_file("", true),
-							checkThirdParty = false,
-						},
-						-- Do not send telemetry data
-						telemetry = {
-							enable = false,
-						},
-					},
-				},
-			})
-
-			vim.g.lua_ls_initialized = true
-		end
+require("lspconfig").lua_ls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	root_dir = function()
+		return vim.loop.cwd()
 	end,
+	cmd = { "lua-lsp" },
+	settings = {
+		Lua = {
+			workspace = { checkThirdParty = false },
+			telemetry = { enable = false },
+		},
+	},
 })
 
--- Set up Nix LSP only when a Nix file is opened
-vim.api.nvim_create_autocmd("FileType", {
-	group = lsp_setup_group,
-	pattern = "nix",
-	callback = function()
-		-- Use a flag to ensure we only set up nixd once
-		if not vim.g.nixd_initialized then
-			require("lspconfig").nixd.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			vim.g.nixd_initialized = true
-		end
-	end,
+require("lspconfig").nixd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
 })
