@@ -66,7 +66,6 @@
     ];
     plugins = with pkgs.vimPlugins; [
       comment-nvim
-      lazy-nvim
       # telescope plugins
       plenary-nvim
       telescope-fzf-native-nvim
@@ -76,9 +75,13 @@
       # lsp plugins
       fidget-nvim
       lazydev-nvim
-      cmp-nvim-lsp
       nvim-lspconfig
-
+      # completion
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      luasnip
     ];
     extraLuaConfig = ''
       ${builtins.readFile ./nvim/options.lua}
