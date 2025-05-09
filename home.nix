@@ -57,8 +57,8 @@
 
   programs.neovim =
     let
-      pluginWithConfig = plugin: path: {
-        inherit plugin;
+      pluginWithConfig = package: path: {
+        plugin = package;
         type = "lua";
         config = builtins.readFile path;
       };
