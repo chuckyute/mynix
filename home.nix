@@ -71,11 +71,7 @@
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
       nvim-web-devicons
-      {
-        plugin = telescope-nvim;
-        type = "lua";
-        config = builtins.readFile ./telescope.lua;
-      }
+      telescope-nvim
       # lsp plugins
       nvim-lspconfig
       fidget-nvim
@@ -83,18 +79,11 @@
 
     ];
     extraLuaConfig = ''
-      require("options")
+      ${builtins.readFile ./nvim/options.lua}
+      ${builtins.readFile ./nvim/plugins.lua}
     '';
   };
 
-  xdg.configFile =
-    let
-      # Read all files in your nvim directory
-      nvimFiles = builtins.readDir ./nvim;
-      # Create a set of file mappings
-      makeEntry = name: _: { "nvim/lua/${name}".source = ./nvim + "/${name}"; };
-    in
-      lib.foldl lib.recursiveUpdate {} (lib.mapAttrsToList makeEntry nvimFiles);
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
