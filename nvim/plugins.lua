@@ -145,13 +145,7 @@ end
 
 -- Register with lazy.nvim just once
 require("lazy").setup({
-	{
-		telescope_setup,
-		"neovim/nvim-lspconfig",
-		config = function() end, -- Empty config - we'll set up servers via autocmds
-	},
-
-	-- Other plugins...
+	telescope_setup,
 }, {
 	install = { missing = false },
 })
