@@ -68,7 +68,7 @@ local telescope_setup = {
 }
 
 -- Define a factory function for creating LSP configs with home-manager dependencies handled separately
-local function create_lsp_config(server, settings)
+local function setup_server(server, settings)
 	local on_attach = function(client, bufnr)
 		-- Common keymaps
 		local bufmap = function(keys, func, desc)
@@ -127,8 +127,7 @@ local function create_lsp_config(server, settings)
 			settings.on_attach(client, bufnr)
 		end
 	end
-	local config = function()
-		-- Create the common on_attach function
+	return function()
 		-- Set up capabilities
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -142,43 +141,47 @@ local function create_lsp_config(server, settings)
 			capabilities = capabilities,
 		}, settings.server_settings or {}))
 	end
-	return {
-		"neovim/nvim-lspconfig",
-		ft = settings.filetypes or { server:match("(.-)_ls$") or server },
-		config = config,
-	}
 end
 
--- In your lazy.nvim setup:
+-- Register with lazy.nvim just once
 require("lazy").setup({
-	telescope_setup,
-	-- Lua LSP
-	create_lsp_config("lua_ls", {
-		filetypes = { "lua" },
-		setup = function()
-			require("lazydev").setup()
-		end,
-		server_settings = {
-			root_dir = function()
-				return vim.loop.cwd()
-			end,
-			cmd = { "lua-lsp" },
-			settings = {
-				Lua = {
-					workspace = { checkThirdParty = false },
-					telemetry = { enable = false },
-				},
-			},
-		},
-	}),
-	-- Nix LSP
-	create_lsp_config("nixd", {
-		filetypes = { "nix" },
-		server_settings = {
-			-- Any rnix-specific settings
-		},
-	}),
-	-- Add other plugins...
+	{
+		telescope_setup,
+		"neovim/nvim-lspconfig",
+		config = function() end, -- Empty config - we'll set up servers via autocmds
+	},
+
+	-- Other plugins...
 }, {
 	install = { missing = false },
+})
+
+-- Set up autocmds to initialize servers for specific filetypes
+local augroup = vim.api.nvim_create_augroup("LspSetup", { clear = true })
+
+-- Lua LSP
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup,
+	pattern = "lua",
+	callback = setup_server("lua_ls", {
+		setup = function()
+			require("neodev").setup()
+		end,
+		server_settings = {
+			-- Lua-specific settings
+		},
+	}),
+	once = true, -- Only set up once per session
+})
+
+-- Nix LSP
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup,
+	pattern = "nix",
+	callback = setup_server("nixd", {
+		server_settings = {
+			-- Nix-specific settings
+		},
+	}),
+	once = true, -- Only set up once per session
 })
