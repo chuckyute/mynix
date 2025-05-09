@@ -1,6 +1,10 @@
 require("Comment").setup({})
 
 require("lazy").setup({
-	require("tscope"),
+	{
+		"nvim-telescope/telescope.nvim",
+		event = "VimEnter",
+		config = false,
+	},
 	install = { missing = false },
 })

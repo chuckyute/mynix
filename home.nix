@@ -71,6 +71,11 @@
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
       nvim-web-devicons
+      {
+        plugin = telescope-nvim;
+        type = "lua";
+        config = builtins.readFile ./telescope.lua;
+      }
       # lsp plugins
       nvim-lspconfig
       fidget-nvim
