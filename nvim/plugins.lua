@@ -66,6 +66,7 @@ require("lazy").setup({
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, "[S]earch [N]eovim files")
 		end,
-	},
-	install = { missing = false },
-})
+	}},
+	{
+		install = { missing = false },
+	})
