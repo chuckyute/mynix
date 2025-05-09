@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -24,7 +24,7 @@
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-    pkgs.nerd-fonts.code-new-roman
+    #pkgs.nerd-fonts.code-new-roman
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -87,7 +87,7 @@
       # Read all files in your nvim directory
       nvimFiles = builtins.readDir ./nvim;
       # Create a set of file mappings
-      makeEntry = name: _: { "nvim/lua/${name}".source = ./nvim + "/${name}"; }
+      makeEntry = name: _: { "nvim/lua/${name}".source = ./nvim + "/${name}"; };
     in
       lib.foldl lib.recursiveUpdate {} (lib.mapAttrsToList makeEntry nvimFiles);
   # Home Manager can also manage your environment variables through

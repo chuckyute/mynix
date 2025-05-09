@@ -1,6 +1,6 @@
 require("Comment").setup({})
 
 require("lazy").setup({
-	require("telescope"),
+	require("tscope"),
 	install = { missing = false },
 })
