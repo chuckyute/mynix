@@ -70,6 +70,7 @@
         config = "colorscheme gruvbox";
       }
       comment-nvim
+      lualine-nvim
       # telescope plugins
       plenary-nvim
       telescope-fzf-native-nvim
@@ -85,6 +86,8 @@
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
+      cmp_luasnip
+      friendly-snippets
       luasnip
       {
         plugin = nvim-cmp;
