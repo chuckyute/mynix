@@ -1,3 +1,8 @@
+require("lualing").setup({
+	icons_enabled = true,
+	theme = "gruvbox",
+})
+
 require("Comment").setup({})
 
 require("fidget").setup({})

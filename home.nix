@@ -65,12 +65,17 @@
       wl-clipboard
     ];
     plugins = with pkgs.vimPlugins; [
+      {
+        plugin = gruvbox-nvim;
+        config = "colorscheme gruvbox";
+      }
       comment-nvim
       # telescope plugins
       plenary-nvim
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
       nvim-web-devicons
+      vim-nix
       {
         plugin = telescope-nvim;
         type = "lua";
@@ -93,6 +98,17 @@
         plugin = nvim-lspconfig;
         type = "lua";
         config = builtins.readFile ./nvim/lsp.lua;
+      }
+      {
+        plugin = (nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-nix
+          p.tree-sitter-vim
+          p.tree-sitter-bash
+          p.tree-sitter-lua
+          p.tree-sitter-json
+        ]));
+        type = "lua";
+        config = builtins.readFile ./nvim/treesitter.lua;
       }
     ];
     extraLuaConfig = ''
