@@ -55,15 +55,7 @@
     userEmail = "charlieyoung0807@gmail.com";
   };
 
-  programs.neovim =
-    let
-      pluginWithConfig = package: path: {
-        plugin = package;
-        type = "lua";
-        config = builtins.readFile path;
-      };
-    in
-    {
+  programs.neovim = {
     enable = true;
     extraPackages = with pkgs; [
       nerd-fonts.code-new-roman
@@ -79,17 +71,29 @@
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
       nvim-web-devicons
-      pluginWithConfig telescope-nvim ./nvim/telescope.lua
+      {
+        plugin = telescope-nvim;
+        type = "lua";
+        config = builtins.readFile ./nvim/telescope.lua;
+      }
       # completion
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
       luasnip
-      pluginWithConfig nvim-cmp ./nvim/cmp.lua
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = builtins.readFile ./nvim/cmp.lua;
+      }
       # lsp plugins
       fidget-nvim
       lazydev-nvim
-      pluginWithConfig nvim-lspconfig ./nvim/lsp.lua
+      {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = builtins.readFile ./nvim/lsp.lua;
+      }
     ];
     extraLuaConfig = ''
       ${builtins.readFile ./nvim/options.lua}
