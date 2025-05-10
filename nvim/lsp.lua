@@ -72,12 +72,7 @@ local lspconfig = require("lspconfig")
 
 -- Initialize lazydev for Neovim Lua development (safely)
 pcall(function()
-	require("lazydev").setup({
-		library = {
-			plugins = true, -- Enable all installed plugins
-			types = true, -- Enable type checking
-		},
-	})
+	require("lazydev").setup({})
 end)
 
 -- Set up Lua LSP with the known path
