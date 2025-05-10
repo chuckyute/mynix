@@ -111,6 +111,16 @@ lspconfig.nixd.setup({
 	capabilities = capabilities,
 })
 
+local gd_config = {
+	capabilities = capabilities,
+	settings = {},
+	root_dir = require("lspconfig.util").root_pattern("project.godot", ".git"),
+}
+if vim.fn.has("win32") == 1 then
+	gd_config["cmd"] = { "ncat", "localhost", os.getenv("GDScript_Port") or "6005" }
+end
+lspconfig.gdscript.setup(gd_config)
+
 -- Helper command to debug LSP status
 vim.api.nvim_create_user_command("LspDebug", function()
 	local clients = vim.lsp.get_active_clients()
