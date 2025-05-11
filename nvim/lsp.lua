@@ -2,29 +2,23 @@ local on_attach = function(client, bufnr)
 	local bufmap = function(keys, func, desc)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
 	end
-
 	-- Essential LSP mappings
 	bufmap("<leader>r", vim.lsp.buf.rename, "Rename")
 	bufmap("<leader>a", vim.lsp.buf.code_action, "Code Action")
-
 	bufmap("gd", vim.lsp.buf.definition, "Go to Definition")
 	bufmap("gD", vim.lsp.buf.declaration, "Go to Declaration")
 	bufmap("gI", vim.lsp.buf.implementation, "Go to Implementation")
 	bufmap("<leader>D", vim.lsp.buf.type_definition, "Type Definition")
-
 	-- Telescope integrations
 	bufmap("gr", require("telescope.builtin").lsp_references, "Find References")
 	bufmap("<leader>s", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 	bufmap("<leader>S", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
-
 	-- Documentation & diagnostic helpers
 	bufmap("K", vim.lsp.buf.hover, "Hover Documentation")
-
 	-- Format command
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		vim.lsp.buf.format()
 	end, { desc = "Format current buffer with LSP" })
-
 	-- Document highlighting on cursor hold
 	if client.server_capabilities.documentHighlightProvider then
 		local highlight_augroup = vim.api.nvim_create_augroup("lsp-document-highlight-" .. bufnr, { clear = true })
@@ -33,13 +27,11 @@ local on_attach = function(client, bufnr)
 			group = highlight_augroup,
 			callback = vim.lsp.buf.document_highlight,
 		})
-
 		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 			buffer = bufnr,
 			group = highlight_augroup,
 			callback = vim.lsp.buf.clear_references,
 		})
-
 		vim.api.nvim_create_autocmd("LspDetach", {
 			buffer = bufnr,
 			group = vim.api.nvim_create_augroup("lsp-detach-" .. bufnr, { clear = true }),
@@ -49,17 +41,15 @@ local on_attach = function(client, bufnr)
 			end,
 		})
 	end
-
 	-- Inlay hints (Neovim >= 0.10.0)
 	if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
 		-- Enable inlay hints by default
-		vim.lsp.inlay_hint.enable(bufnr, true)
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 		-- Toggle inlay hints with <leader>th
 		bufmap("<leader>th", function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(bufnr), { bufnr = bufnr })
 		end, "Toggle Inlay Hints")
 	end
-
 	-- Display a notification when the LSP attaches
 	vim.notify("LSP '" .. client.name .. "' attached to buffer", vim.log.levels.INFO)
 end
