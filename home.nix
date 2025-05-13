@@ -15,8 +15,9 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   imports = [
-    ./nvim
-    ./ghostty
+    ./modules/ghostty.nix
+    ./modules/nvim
+    ./modules/hyprland.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -52,6 +53,12 @@
     userName = "chuckyute";
     userEmail = "charlieyoung0807@gmail.com";
   };
+
+  # programs.steam = {
+  #   enable = true;
+  #   remotePlay.openFirewall = true; # opens ports in firewall for steam remote play
+  #   dedicatedServer.openFirewall = true; # opens ports in firewall for source dedicated server
+  # };
 
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, system, ... }:
 
 {
   imports =
@@ -73,35 +73,39 @@
   # session management
   programs.uwsm = {
     enable = true;
-
-    settings = {
-      shortcuts = {
-        terminal = "ghostty";
-        browser = "chrome";
-      };
+    waylandCompositors.hyprland = {
+      prettyName = "Hyprland";
+      comment = "Hyprland compositor managed by UWSM";
+      binPath = "/run/current-system/sw/bin/Hyprland";
     };
+
+    # settings = {
+    #   shortcuts = {
+    #     terminal = "ghostty";
+    #     browser = "firefox";
+    #   };
+    # };
   };
 
   # xdg desktop portal for screen sharing, file choosers, etc.
-  xdg.portal = {
-    enable = true;
-
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
-    ];
-    wlr.enable = true;
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #
+  #   extraPortals = [
+  #     (inputs.xdph.packages.${system}.xdg-desktop-portal-hyprland)
+  #     pkgs.xdg-desktop-portal-gtk
+  #   ];
+  #   wlr.enable = false;
+  # };
 
   # opengl and gpu support
   hardware = {
-    nvidia.powerManagement.enable = true;
-    nvidia.modesetting.enable = true;
+    # nvidia.powerManagement.enable = true;
+    # nvidia.modesetting.enable = true;
 
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      # driSupport32Bit = true;
     };
   };
 
@@ -139,6 +143,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  # NOTE: only for vm
+  services.qemuGuest.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
