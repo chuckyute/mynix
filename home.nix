@@ -14,17 +14,16 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  imports = [
+    ./nvim
+    ./ghostty
+  ];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   fonts.fontconfig.enable = true;
   home.packages = [
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
     pkgs.nerd-fonts.code-new-roman
-
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -52,82 +51,6 @@
     enable = true;
     userName = "chuckyute";
     userEmail = "charlieyoung0807@gmail.com";
-  };
-
-  programs.neovim = {
-    enable = true;
-    extraPackages = with pkgs; [
-      nerd-fonts.code-new-roman
-      ripgrep
-      lua-language-server
-      nixd
-      wl-clipboard
-      stylua
-    ];
-    plugins = with pkgs.vimPlugins; [
-      {
-        plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
-      }
-      comment-nvim
-      lualine-nvim
-      gitsigns-nvim
-      which-key-nvim
-      todo-comments-nvim
-      mini-nvim
-      vim-godot
-      # telescope plugins
-      plenary-nvim
-      telescope-fzf-native-nvim
-      telescope-ui-select-nvim
-      nvim-web-devicons
-      vim-nix
-      {
-        plugin = telescope-nvim;
-        type = "lua";
-        config = builtins.readFile ./nvim/telescope.lua;
-      }
-      # completion
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
-      cmp_luasnip
-      friendly-snippets
-      luasnip
-      {
-        plugin = nvim-cmp;
-        type = "lua";
-        config = builtins.readFile ./nvim/cmp.lua;
-      }
-      # lsp plugins
-      fidget-nvim
-      lazydev-nvim
-      {
-        plugin = nvim-lspconfig;
-        type = "lua";
-        config = builtins.readFile ./nvim/lsp.lua;
-      }
-      {
-        plugin = (nvim-treesitter.withPlugins (p: [
-          p.tree-sitter-nix
-          p.tree-sitter-vim
-          p.tree-sitter-bash
-          p.tree-sitter-lua
-          p.tree-sitter-json
-        ]));
-        type = "lua";
-        config = builtins.readFile ./nvim/treesitter.lua;
-      }
-      {
-        plugin = conform-nvim;
-        type = "lua";
-        config = builtins.readFile ./nvim/format.lua;
-      }
-    ];
-    extraLuaConfig = ''
-      ${builtins.readFile ./nvim/options.lua}
-      ${builtins.readFile ./nvim/plugins.lua}
-    '';
   };
 
   home.sessionVariables = {

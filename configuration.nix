@@ -63,9 +63,63 @@
     neovim
     wget
     git
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
   ];
+
+  services.displayManager = {
+    sddm.enable = true;
+    sddm.wayland.enable = true;
+  };
+
+  # session management
+  programs.uwsm = {
+    enable = true;
+
+    settings = {
+      shortcuts = {
+        terminal = "ghostty";
+        browser = "chrome";
+      };
+    };
+  };
+
+  # xdg desktop portal for screen sharing, file choosers, etc.
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
+    wlr.enable = true;
+  };
+
+  # opengl and gpu support
+  hardware = {
+    nvidia.powerManagement.enable = true;
+    nvidia.modesetting.enable = true;
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+  };
+
+  # audio
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+  # polkit for security escalation
+  security.polkit.enable = true;
+
+  # dconf for gnome/gtk app settings
+  programs.dconf.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
