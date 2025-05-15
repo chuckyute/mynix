@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.username = "chuck";
@@ -12,21 +12,25 @@
   ];
 
   fonts.fontconfig.enable = true;
-  home.packages = [
-    pkgs.nerd-fonts.code-new-roman
+  home.packages = with pkgs; [
+    nerd-fonts.code-new-roman
+    github-cli
   ];
 
   programs.git = {
     enable = true;
     userName = "chuckyute";
     userEmail = "charlieyoung0807@gmail.com";
-  };
 
-  # programs.steam = {
-  #   enable = true;
-  #   remotePlay.openFirewall = true; # opens ports in firewall for steam remote play
-  #   dedicatedServer.openFirewall = true; # opens ports in firewall for source dedicated server
-  # };
+    extraConfig = {
+      "credential \"https://github.com\"" = {
+        helper = "!/usr/bin/env gh auth git-credential";
+      };
+      "credential \"https://gist.github.com\"" = {
+        helper = "!/usr/bin/env gh auth git-credential";
+      };
+    };
+  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
