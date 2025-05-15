@@ -14,9 +14,7 @@ conform.setup({
 	end,
 	formatters_by_ft = {
 		lua = { "stylua" },
-		-- Add more formatters as needed
-		-- python = { "isort", "black" },
-		-- javascript = { { "prettierd", "prettier" } },
+		nix = { "nixfmt" },
 	},
 })
 

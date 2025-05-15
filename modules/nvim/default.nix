@@ -10,6 +10,7 @@
       nixd
       wl-clipboard
       stylua
+      nixfmt-rfc-style
     ];
     plugins = with pkgs.vimPlugins; [
       {
