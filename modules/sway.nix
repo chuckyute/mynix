@@ -1,5 +1,18 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    rofi-wayland
+    waybar
+    mako
+    wl-clipboard
+    swayidle
+    swaylock
+    grim
+    slurp
+    wlr-which-key
+    sov
+  ];
+
   wayland.windowManager.sway = {
     enable = true;
 

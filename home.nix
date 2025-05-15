@@ -15,6 +15,8 @@
   home.packages = with pkgs; [
     nerd-fonts.code-new-roman
     github-cli
+    firefox-wayland
+    xfce.thunar
   ];
 
   programs.git = {
