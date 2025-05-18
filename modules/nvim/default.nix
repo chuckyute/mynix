@@ -13,10 +13,7 @@
       nixfmt-rfc-style
     ];
     plugins = with pkgs.vimPlugins; [
-      {
-        plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
-      }
+      gruvbox-nvim
       comment-nvim
       lualine-nvim
       gitsigns-nvim
@@ -56,13 +53,15 @@
         config = builtins.readFile ./lsp.lua;
       }
       {
-        plugin = (nvim-treesitter.withPlugins (p: [
-          p.tree-sitter-nix
-          p.tree-sitter-vim
-          p.tree-sitter-bash
-          p.tree-sitter-lua
-          p.tree-sitter-json
-        ]));
+        plugin = (
+          nvim-treesitter.withPlugins (p: [
+            p.tree-sitter-nix
+            p.tree-sitter-vim
+            p.tree-sitter-bash
+            p.tree-sitter-lua
+            p.tree-sitter-json
+          ])
+        );
         type = "lua";
         config = builtins.readFile ./treesitter.lua;
       }

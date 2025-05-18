@@ -63,3 +63,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+vim.o.background = "dark"
+require("gruvbox").setup({
+	terminal_colors = true,
+	bold = true,
+	italic = {
+		strings = false,
+		emphasis = false,
+		comments = false,
+		operators = false,
+		folds = false,
+	},
+	strikethrough = false,
+	contrast = "soft",
+})
+vim.cmd.colorscheme("gruvbox")
