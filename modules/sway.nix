@@ -33,7 +33,6 @@
       in
       {
         inherit modifier terminal;
-        ipc-socket = "~/.sway-ipc.soc";
 
         gaps = {
           inner = 5;
@@ -136,10 +135,10 @@
             "Return" = "mode default";
           };
           applications = {
-            "s" = "exec steam; mode default # Steam";
-            "d" = "exec discord; mode default # Discord";
-            "f" = "exec ${browser}; mode default # ${browser}";
-            "g" = "exec godot; mode default # Godot";
+            "s" = "exec steam; mode default; # Steam";
+            "d" = "exec discord; mode default; # Discord";
+            "f" = "exec ${browser}; mode default; # ${browser}";
+            "g" = "exec godot; mode default; # Godot";
             "Escape" = "mode default";
             "Return" = "mode default";
           };
@@ -160,7 +159,6 @@
         };
 
         startup = [
-          { command = "mako"; }
           {
             command = ''
               swayidle -w \
@@ -174,7 +172,7 @@
       };
   };
 
-  programs.mako = {
+  services.mako = {
     enable = true;
     defaultTimeout = 5000;
     borderSize = 2;
@@ -187,12 +185,12 @@
       save_dir = $HOME/pictures/screenshots
     '';
     "pictures/screenshots/.keep".text = "";
-    ".config/wlr-which-key/config.toml".text = ''
-      primary_modifier = "mod4"
-      # secondary_modifier = "mod1"
-      timeout = 5000
-      position = "bottom"
-      load_from_sway = true
+    ".config/wlr-which-key/config.yaml".text = ''
+      primary_modifier: "mod4"
+      # secondary_modifier: "mod1"
+      timeout: 5000
+      position: "bottom"
+      load_from_sway: true
     '';
   };
 
