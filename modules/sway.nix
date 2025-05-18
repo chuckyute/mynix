@@ -9,6 +9,7 @@
     swaylock
     grim
     slurp
+    swappy
     wlr-which-key
     sov
     pamixer
@@ -25,13 +26,14 @@
       let
         modifier = "Mod4";
         terminal = "ghostty";
-        menu = "rofi -show drun";
         browser = "firefox";
-        fileManager = "thunar";
-        alt = "Mod1";
+        # menu = "rofi -show drun";
+        # fileManager = "thunar";
+        # alt = "Mod1";
       in
       {
         inherit modifier terminal;
+        ipc-socket = "~/.sway-ipc.soc";
 
         gaps = {
           inner = 5;
@@ -49,7 +51,7 @@
 
         floating = {
           titlebar = true;
-          boarder = 2;
+          border = 2;
 
           criteria = [
             { app_id = "^pavucontrol$"; }
@@ -63,11 +65,11 @@
         keybindings =
           let
             mod = key: "${modifier}+${key}";
-            modAlt = key: "${modifier}+${alt}+${key}";
+            #modAlt = key: "${modifier}+${alt}+${key}";
             modShift = key: "${modifier}+Shift+${key}";
           in
           {
-            ${mod "t"} = "exec ghostty";
+            ${mod "t"} = "exec ${terminal}";
             ${mod "q"} = "kill";
             ${modShift "e"} = "exec wlogout";
             ${modShift "c"} = "exec swaylock";
@@ -79,8 +81,8 @@
             ${mod "l"} = "focus right";
             ${modShift "h"} = "move left";
             ${modShift "j"} = "move down";
-            ${modShift "k"} = "focus up";
-            ${modShift "l"} = "focus right";
+            ${modShift "k"} = "move up";
+            ${modShift "l"} = "move right";
             # layout
             ${mod "b"} = "splith";
             ${mod "v"} = "splitv";
@@ -117,51 +119,58 @@
             # modes
             ${modShift "b"} = "mode brightness";
             ${modShift "v"} = "mode volume";
-            ${modShift "a"} = "mode applications";
+            ${mod "a"} = "mode applications";
+            ${mod "r"} = "mode resize";
             # print
             ${mod "p"} = "exec grim -g \"$(slurp)\" - | swappy -f -";
             ${modShift "p"} = "exec grim -g \"$(slurp)\" - | wl-copy";
 
-            modes = {
-              resize = {
-                "h" = "resize shrink width 10px";
-                "j" = "resize grow height 10px";
-                "k" = "resize shrink height 10px";
-                "l" = "resize grow width 10px";
-                "Escape" = "mode default";
-                "Return" = "mode default";
-              };
-              applications = {
-                "s" = "exec steam; mode default";
-                "d" = "exec discord; mode default";
-                "f" = "exec firefox; mode default";
-                "g" = "exec godot; mode default";
-                "Escape" = "mode default";
-                "Return" = "mode default";
-              };
-              volume = {
-                "k" = "exec pamixer -i 5";
-                "j" = "exec pamixer -d 5";
-                "space" = "exec pamixer -t";
-                "Escape" = "mode default";
-                "Return" = "mode default";
-              };
-              brightness = {
-                "k" = "exec brightnessctl set 5%+";
-                "j" = "exec brightnessctl set 5%-";
-                "Escape" = "mode default";
-                "Return" = "mode default";
-              };
-
-            };
-
-            startup = [
-              { command = "mako"; }
-              {
-                command = "swayidle -w timeout 300 'swaylock -f' timeout 600 'swaymsg \"output * dpms off\"' resume 'swaymsg\"output * dpms on\"' before-sleep 'swaylock -f'";
-              }
-            ];
           };
+        modes = {
+          resize = {
+            "h" = "resize shrink width 10px # Shrink width";
+            "j" = "resize grow height 10px # Grow height";
+            "k" = "resize shrink height 10px # Shrink height";
+            "l" = "resize grow width 10px # Grow width";
+            "Escape" = "mode default";
+            "Return" = "mode default";
+          };
+          applications = {
+            "s" = "exec steam; mode default # Steam";
+            "d" = "exec discord; mode default # Discord";
+            "f" = "exec ${browser}; mode default # ${browser}";
+            "g" = "exec godot; mode default # Godot";
+            "Escape" = "mode default";
+            "Return" = "mode default";
+          };
+          volume = {
+            "k" = "exec pamixer -i 5 # Volume up";
+            "j" = "exec pamixer -d 5 # Volume down";
+            "space" = "exec pamixer -t # Mute";
+            "Escape" = "mode default";
+            "Return" = "mode default";
+          };
+          brightness = {
+            "k" = "exec brightnessctl set 5%+ # Brightness up";
+            "j" = "exec brightnessctl set 5%- # Brightness down";
+            "Escape" = "mode default";
+            "Return" = "mode default";
+          };
+
+        };
+
+        startup = [
+          { command = "mako"; }
+          {
+            command = ''
+              swayidle -w \
+              timeout 300 'swaylock -f -c 000000' \
+              timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+              before-sleep 'swaylock -f -c 000000'
+            '';
+          }
+          { command = "wlr-which-key"; }
+        ];
       };
   };
 
@@ -178,6 +187,13 @@
       save_dir = $HOME/pictures/screenshots
     '';
     "pictures/screenshots/.keep".text = "";
+    ".config/wlr-which-key/config.toml".text = ''
+      primary_modifier = "mod4"
+      # secondary_modifier = "mod1"
+      timeout = 5000
+      position = "bottom"
+      load_from_sway = true
+    '';
   };
 
 }
