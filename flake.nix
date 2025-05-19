@@ -41,7 +41,10 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                stylix = inputs.stylix;
+              };
               home-manager.users.chuck = import ./home.nix;
             }
           ];
