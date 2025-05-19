@@ -28,11 +28,16 @@
       set -e
       echo "Updating flake inputs..."
       cd $HOME/mynix
+      if [ ! -w ".git/objects" ]; then
+        echo "Fixing repository permissions..."
+        sudo chown -R $(whoami):$(whoami) .
+        sudo chmod -R u+rw .
+      fi
       nix flake update
       echo "Rebuilding and switching to updated system..."
       sudo nixos-rebuild switch --flake .#nixos
       echo "Updating home-manager configuration..."
-      home-manager switch --flake .#nixos
+      ${pkgs.home-manager}/bin/home-manager switch --flake .#nixos
       echo "System update successfull"
       cd -
     '')
@@ -42,7 +47,7 @@
       cd $HOME/mynix
       if ! git diff --quiet || ! git diff --staged --quiet; then
         echo "Committing Configuration changes..."
-        git add .
+        sudo git add .
         git commit
       fi
       echo "Building and switching to new configuration.."
