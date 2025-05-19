@@ -10,7 +10,6 @@
     grim
     slurp
     swappy
-    wlr-which-key
     sov
     pamixer
     brightnessctl
@@ -167,7 +166,6 @@
               before-sleep 'swaylock -f -c 000000'
             '';
           }
-          { command = "wlr-which-key"; }
         ];
       };
   };
@@ -188,13 +186,5 @@
       save_dir = $HOME/pictures/screenshots
     '';
     "pictures/screenshots/.keep".text = "";
-    ".config/wlr-which-key/config.yaml".text = ''
-      primary_modifier: "mod4"
-      # secondary_modifier: "mod1"
-      timeout: 5000
-      position: "bottom"
-      load_from_sway: true
-    '';
   };
-
 }
