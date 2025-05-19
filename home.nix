@@ -34,6 +34,8 @@
         helper = "!/usr/bin/env gh auth git-credential";
       };
     };
+
+    core.editor = "nvim";
   };
 
   home.sessionVariables = {
