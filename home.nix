@@ -10,6 +10,7 @@
     ./modules/nvim
     ./modules/sway.nix
     ./modules/stylix.nix
+    ./modules/scripts.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -37,6 +38,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    GIT_EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.

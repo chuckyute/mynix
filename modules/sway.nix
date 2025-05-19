@@ -25,7 +25,7 @@
     config =
       let
         modifier = "Mod4";
-        terminal = "ghostty";
+        terminal = "ghostty -e bash";
         browser = "firefox";
         # menu = "rofi -show drun";
         # fileManager = "thunar";
@@ -174,9 +174,12 @@
 
   services.mako = {
     enable = true;
-    defaultTimeout = 5000;
-    borderSize = 2;
-    borderRadius = 5;
+
+    settings = {
+      defaultTimeout = 5000;
+      borderSize = 2;
+      borderRadius = 5;
+    };
   };
 
   home.file = {
