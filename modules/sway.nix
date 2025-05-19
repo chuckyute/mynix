@@ -14,6 +14,7 @@
     pamixer
     brightnessctl
     wlogout
+    networkmanagerapplet
   ];
 
   wayland.windowManager.sway = {
@@ -134,10 +135,11 @@
             "Return" = "mode default";
           };
           applications = {
-            "s" = "exec steam; mode default; # Steam";
-            "d" = "exec discord; mode default; # Discord";
-            "f" = "exec ${browser}; mode default; # ${browser}";
-            "g" = "exec godot; mode default; # Godot";
+            "s" = "exec steam; mode default;";
+            "d" = "exec discord; mode default;";
+            "f" = "exec ${browser}; mode default;";
+            "g" = "exec godot; mode default;";
+            "n" = "exec nm-connection-editor; mode default";
             "Escape" = "mode default";
             "Return" = "mode default";
           };
