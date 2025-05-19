@@ -5,11 +5,6 @@
     ./hardware-configuration.nix
   ];
 
-  stylix = {
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
-  };
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -88,6 +83,11 @@
     jack.enable = true;
   };
 
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+  };
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
@@ -100,5 +100,5 @@
   services.spice-vdagentd.enable = true;
   services.qemuGuest.enable = true;
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+  #system.stateVersion = "25.11"; # Did you read the comment?
 }

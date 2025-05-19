@@ -109,7 +109,10 @@ lspconfig.nixd.setup({
 					expr = '(builtins.getFlake "github:chuckyute/mynix").nixosConfigurations.nixos.options',
 				},
 				home_manager = {
-					expr = '(builtins.getFlake "github:chuckyute/mynix").homeConfiguration.nixos.options',
+					expr = '(builtins.getFlake "github:chuckyute/mynix").homeConfigurations.nixos.options',
+				},
+				stylix = {
+					expr = '(builtins.getFlake "github:chuckyute/mynix").homeConfigurations.nixos.options',
 				},
 			},
 		},

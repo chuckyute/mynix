@@ -1,14 +1,15 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   home.username = "chuck";
   home.homeDirectory = "/home/chuck";
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   imports = [
     ./modules/ghostty.nix
     ./modules/nvim
     ./modules/sway.nix
+    ./modules/stylix.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -17,7 +18,6 @@
     github-cli
     firefox-wayland
     xfce.thunar
-    foliate
   ];
 
   programs.git = {
