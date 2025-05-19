@@ -33,9 +33,9 @@
       "credential \"https://gist.github.com\"" = {
         helper = "!/usr/bin/env gh auth git-credential";
       };
+      core.editor = "nvim";
     };
 
-    core.editor = "nvim";
   };
 
   home.sessionVariables = {
