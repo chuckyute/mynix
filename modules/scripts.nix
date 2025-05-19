@@ -36,8 +36,6 @@
       nix flake update
       echo "Rebuilding and switching to updated system..."
       sudo nixos-rebuild switch --flake .#nixos
-      echo "Updating home-manager configuration..."
-      ${pkgs.home-manager}/bin/home-manager switch --flake .#nixos
       echo "System update successfull"
       cd -
     '')
