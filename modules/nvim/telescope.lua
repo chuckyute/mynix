@@ -2,11 +2,27 @@ require("telescope").setup({
 	-- You can put your default mappings / updates / etc. in here
 	--  All the info you're looking for is in `:help telescope.setup()`
 	--
-	-- defaults = {
-	--   mappings = {
-	--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-	--   },
-	-- },
+	defaults = {
+		layout_strategy = "flex",
+		layout_config = {
+			-- when terminal width is less than columns use vertical layout
+			-- when terminal width is greater use horizontal layout
+			-- when terminal height is less than lines use horizontal layout
+			-- when terminal height is greater than lines use vertical layout
+			flex = {
+				flip_columns = 80,
+				flip_lines = 25,
+			},
+			vertical = {
+				preview_cutoff = 0,
+				preview_height = 0.4,
+			},
+			horizontal = {
+				preview_cutoff = 0,
+				preview_width = 0.5,
+			},
+		},
+	},
 	-- pickers = {}
 	extensions = {
 		["ui-select"] = {

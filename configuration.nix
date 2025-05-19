@@ -85,7 +85,31 @@
 
   stylix = {
     enable = true;
+    autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.code-new-roman;
+        name = "CodeNewRoman Nerd Font";
+      };
+
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+    };
+
+    cursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+      size = 16;
+    };
   };
 
   # Enable the OpenSSH daemon.
@@ -100,5 +124,5 @@
   services.spice-vdagentd.enable = true;
   services.qemuGuest.enable = true;
 
-  #system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 }
