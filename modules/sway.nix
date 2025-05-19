@@ -41,7 +41,7 @@
           smartBorders = "on";
         };
 
-        bars = [ { command = "waybar"; } ];
+        bars = [ ];
 
         window = {
           border = 2;

@@ -9,6 +9,7 @@
     ./modules/ghostty.nix
     ./modules/nvim
     ./modules/sway.nix
+    ./modules/waybar.nix
     ./modules/stylix.nix
     ./modules/scripts.nix
   ];
