@@ -139,7 +139,6 @@
             "d" = "exec discord; mode default;";
             "f" = "exec ${browser}; mode default;";
             "g" = "exec godot; mode default;";
-            "n" = "exec nm-connection-editor; mode default";
             "Escape" = "mode default";
             "Return" = "mode default";
           };
