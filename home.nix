@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   home.username = "chuck";
@@ -17,6 +17,7 @@
     github-cli
     firefox-wayland
     xfce.thunar
+    foliate
   ];
 
   programs.git = {
