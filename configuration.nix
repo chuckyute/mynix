@@ -85,6 +85,9 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
+    iwd
+    iw
+    wpa_supplicant
   ];
 
   services.displayManager.ly.enable = true;
