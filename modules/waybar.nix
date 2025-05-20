@@ -18,10 +18,10 @@
         ];
         modules-center = [ "sway/window" ];
         modules-right = [
-          "network"
-          "pulseaudio"
           "clock"
           "tray"
+          "pulseaudio"
+          "network"
         ];
 
         "network" = {
