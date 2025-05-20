@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     libappindicator
-    networkmanagerapplet
   ];
   programs.waybar = {
     enable = true;

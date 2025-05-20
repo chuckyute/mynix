@@ -14,6 +14,7 @@
     pamixer
     brightnessctl
     wlogout
+    networkmanagerapplet
   ];
 
   wayland.windowManager.sway = {
@@ -166,6 +167,7 @@
               before-sleep 'swaylock -f -c 000000'
             '';
           }
+          { command = "nm-applet --indicator"; }
         ];
       };
   };
