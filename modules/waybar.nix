@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    libappindicator
+    networkmanagerapplet
+  ];
   programs.waybar = {
     enable = true;
     systemd = {
@@ -54,6 +58,8 @@
 
         "tray" = {
           spacing = 10;
+          icon-size = 20;
+          show-passive-items = true;
         };
       };
     };

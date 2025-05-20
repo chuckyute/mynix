@@ -14,7 +14,6 @@
     pamixer
     brightnessctl
     wlogout
-    networkmanagerapplet
   ];
 
   wayland.windowManager.sway = {
