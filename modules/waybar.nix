@@ -2,11 +2,14 @@
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = true;
+    systemd = {
+      enable = true;
+      target = "sway-session.target";
+    };
     settings = {
       mainBar = {
         layer = "top";
-        position = "bottom";
+        position = "top";
         height = 30;
         spacing = 4;
         modules-left = [
