@@ -18,10 +18,15 @@
         ];
         modules-center = [ "sway/window" ];
         modules-right = [
+          "pulseaudio"
           "clock"
           "tray"
-          "pulseaudio"
         ];
+
+        "pulseaudio" = {
+          format = "{volume}% {icon}";
+          on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+        };
 
         "clock" = {
           format = "{:%a, %b %d %H:%M}";
@@ -32,11 +37,6 @@
           spacing = 10;
           icon-size = 20;
           show-passive-items = true;
-        };
-
-        "pulseaudio" = {
-          format = "{volume}% {icon}";
-          on-click = "pavucontrol";
         };
       };
     };
