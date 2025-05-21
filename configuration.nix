@@ -99,6 +99,8 @@
 
   # opengl and gpu support
   hardware.graphics.enable = true;
+  hardware.graphics.driSupport = true;
+  hardware.graphics.drisupport32Bit = true;
 
   # audio
   security.rtkit.enable = true;
