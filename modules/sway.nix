@@ -46,7 +46,7 @@
         window = {
           border = 2;
           hideEdgeBorders = "none";
-          titlebar.padding = 10;
+          titlebar = true;
         };
 
         floating = {
