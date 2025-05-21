@@ -15,6 +15,7 @@
     brightnessctl
     wlogout
     networkmanagerapplet
+    pavucontrol
   ];
 
   wayland.windowManager.sway = {
