@@ -1,8 +1,5 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    libappindicator
-  ];
   programs.waybar = {
     enable = true;
     systemd = {
