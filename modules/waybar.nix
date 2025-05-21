@@ -9,7 +9,7 @@
     settings = {
       mainBar = {
         layer = "top";
-        position = "top";
+        position = "bottom";
         height = 30;
         spacing = 4;
         modules-left = [
@@ -20,9 +20,8 @@
         modules-right = [
           "clock"
           "tray"
-          "pulseaudio"
+          "wireplumber"
         ];
-
         "wireplumber" = {
           format = "{volume}% {icon}";
           format-muted = "";

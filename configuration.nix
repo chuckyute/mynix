@@ -108,6 +108,12 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+
+    extraConfig.pipewire = {
+      "context.properties" = {
+        "default.clock.quantum" = 256;
+      };
+    };
   };
 
   stylix = {
