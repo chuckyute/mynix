@@ -20,18 +20,8 @@
         modules-right = [
           "clock"
           "tray"
-          "wireplumber"
+          "pulseaudio"
         ];
-        "wireplumber" = {
-          format = "{volume}% {icon}";
-          format-muted = "";
-          format-icons = [
-            ""
-            ""
-            ""
-          ];
-          on-click = "pavucontrol";
-        };
 
         "clock" = {
           format = "{:%a, %b %d %H:%M}";
@@ -42,6 +32,11 @@
           spacing = 10;
           icon-size = 20;
           show-passive-items = true;
+        };
+
+        "pulseaudio" = {
+          format = "{volume}% {icon}";
+          on-click = "pavucontrol";
         };
       };
     };
