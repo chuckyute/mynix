@@ -21,20 +21,7 @@
           "clock"
           "tray"
           "pulseaudio"
-          "network"
         ];
-
-        "network" = {
-          format-wifi = "{essid} ({signalStrength}%) ";
-          format-ethernet = "{ipaddr}/{cidr} ";
-          tooltip-format = "{ifname} via {gwaddr} ";
-          format-linked = "{ifname} (No IP) ";
-          # TODO: add little guy for disconnected
-          format-disconnected = "Disconnected ";
-          format-alt = "{ifname}: {ipaddr}/{cidr}";
-          on-click = "nm-connection-editor";
-          on-click-right = "pkill -f nm-connection-editor || true";
-        };
 
         "wireplumber" = {
           format = "{volume}% {icon}";
