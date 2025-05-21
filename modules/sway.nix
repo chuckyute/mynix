@@ -56,6 +56,8 @@
 
           criteria = [
             { app_id = "^pavucontrol$"; }
+            { class = "^pavucontrol$"; }
+            { title = "^Volume Control$"; }
             { app_id = "^nm-connection-editor$"; }
             { class = "^Lxappearance$"; }
             { app_id = "^blueberry.py$"; }
