@@ -62,10 +62,6 @@
       sudo nix-collect-garbage -d
       echo "Removing unused store paths..."
       sudo nix-store --gc
-      echo "Optimizing store..."
-      sudo nix-store --optimize
-      echo "Cleaning home-manager generations..."
-      home-manager expire-generations "-30 days"
       echo "Cleaning complete. Current store size:"
       du -sh /nix/store
     '')

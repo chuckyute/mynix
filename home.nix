@@ -19,6 +19,7 @@
     github-cli
     firefox-wayland
     xfce.thunar
+    discord
   ];
 
   programs.git = {
