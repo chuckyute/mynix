@@ -52,8 +52,6 @@
         popups = 16;
       };
     };
-
-    cursor.size = 20;
   };
 
   home.sessionVariables = {
