@@ -10,7 +10,6 @@
     ./modules/nvim
     ./modules/sway.nix
     ./modules/waybar.nix
-    ./modules/stylix.nix
     ./modules/scripts.nix
   ];
 
@@ -37,6 +36,12 @@
       core.editor = "nvim";
     };
 
+  };
+
+  stylix = {
+    targets = {
+      neovim.enable = false;
+    };
   };
 
   home.sessionVariables = {

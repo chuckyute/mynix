@@ -3,6 +3,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./modules/stylix.nix
   ];
 
   # Bootloader.
@@ -113,35 +114,6 @@
       "context.properties" = {
         "default.clock.quantum" = 256;
       };
-    };
-  };
-
-  stylix = {
-    enable = true;
-    autoEnable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
-
-    fonts = {
-      monospace = {
-        package = pkgs.nerd-fonts.code-new-roman;
-        name = "CodeNewRoman Nerd Font";
-      };
-
-      sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
-      };
-
-      serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
-      };
-    };
-
-    cursor = {
-      package = pkgs.vanilla-dmz;
-      name = "Vanilla-DMZ";
-      size = 16;
     };
   };
 

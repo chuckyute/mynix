@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
-
+{ pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
     extraPackages = with pkgs; [
       nerd-fonts.code-new-roman
       ripgrep
