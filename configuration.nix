@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -39,13 +39,47 @@
   };
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
-  networking.wireless.userControlled.enable = true;
+  # disable wpa-supplicant since we're using NetworkManager
+  networking.wireless.enable = false;
 
   # Enable networking
-  networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
 
+    settings = {
+      connection = {
+        "ipv6.addr-gen-mode" = "stable-privacy";
+        "ipv6.ip6-privacy" = "2";
+      };
+    };
+  };
+
+  programs.nm-applet.enable = true;
+
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ ];
+    allowedTCPPorts = [ ];
+    allowPing = true;
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+  };
+
+  services.timesyncd.enable = true;
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -86,9 +120,9 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
-    iwd
     iw
-    wpa_supplicant
+    wget
+    curl
   ];
 
   services.displayManager.ly.enable = true;
@@ -97,9 +131,6 @@
     enable = true;
     wrapperFeatures.gtk = true;
   };
-
-  # opengl and gpu support
-  hardware.graphics.enable = true;
 
   # audio
   security.rtkit.enable = true;
@@ -114,6 +145,14 @@
       "context.properties" = {
         "default.clock.quantum" = 256;
       };
+    };
+  };
+
+  # opengl and gpu support
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
     };
   };
 
