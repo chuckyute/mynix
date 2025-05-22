@@ -36,6 +36,8 @@
         modifier = "Mod4";
         terminal = "ghostty -e bash";
         browser = "firefox";
+        left = "HDMI-A-4";
+        right = "DP-4";
         # menu = "rofi -show drun";
         # fileManager = "thunar";
         # alt = "Mod1";
@@ -43,6 +45,19 @@
       {
         inherit modifier terminal;
         bars = [ ];
+
+        output = {
+          ${left} = {
+            mode = "1920x1080@60.000Hz";
+            position = "0,0";
+          };
+
+          ${right} = {
+            mode = "2560x1440@143.995Hz";
+            position = "1920,0";
+            primary = true;
+          };
+        };
 
         gaps = {
           inner = 5;

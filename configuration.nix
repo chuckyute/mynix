@@ -10,13 +10,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   nix = {
     settings = {
       experimental-features = [
         "nix-command"
         "flakes"
       ];
-      download-buffer-size = 256;
+      download-buffer-size = 512;
       # optimise sharing of identical files in store
       auto-optimise-store = true;
     };
@@ -179,15 +181,6 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-  # NOTE: only for vm
-  services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true;
 
   system.stateVersion = "25.11"; # Did you read the comment?
 }
