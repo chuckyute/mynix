@@ -10,8 +10,8 @@ require("telescope").setup({
 			-- when terminal height is less than lines use horizontal layout
 			-- when terminal height is greater than lines use vertical layout
 			flex = {
-				flip_columns = 80,
-				flip_lines = 25,
+				flip_columns = 85,
+				flip_lines = 35,
 			},
 			vertical = {
 				preview_cutoff = 0,
