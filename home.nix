@@ -43,6 +43,17 @@
     targets = {
       neovim.enable = false;
     };
+
+    fonts = {
+      sizes = {
+        applications = 16;
+        terminal = 18;
+        desktop = 16;
+        popups = 16;
+      };
+    };
+
+    cursor.size = 20;
   };
 
   home.sessionVariables = {
