@@ -115,6 +115,7 @@
             ${mod "w"} = "layout tabbed";
             ${mod "e"} = "layout toggle split";
             ${mod "f"} = "fullscreen toggle";
+            ${mod "o"} = "move workspace to output right";
             ${modShift "space"} = "floating toggle";
             ${mod "space"} = "focus mode_toggle";
             # scratchpad
