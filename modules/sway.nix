@@ -55,7 +55,6 @@
           ${right} = {
             mode = "2560x1440@143.995Hz";
             position = "1920,0";
-            primary = true;
           };
         };
 
