@@ -18,10 +18,18 @@
     pavucontrol
   ];
 
+  home.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  };
+
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
     wrapperFeatures.gtk = true;
+    extraOptions = [ "--unsupported-gpu" ];
 
     config =
       let
@@ -34,6 +42,7 @@
       in
       {
         inherit modifier terminal;
+        bars = [ ];
 
         gaps = {
           inner = 5;
@@ -41,8 +50,6 @@
           smartGaps = true;
           smartBorders = "on";
         };
-
-        bars = [ ];
 
         window = {
           border = 2;
@@ -127,8 +134,9 @@
             # print
             ${mod "p"} = "exec grim -g \"$(slurp)\" - | swappy -f -";
             ${modShift "p"} = "exec grim -g \"$(slurp)\" - | wl-copy";
-
+            # NVIDIA settings exec nvidia-settings
           };
+
         modes = {
           resize = {
             "h" = "resize shrink width 10px # Shrink width";
@@ -138,6 +146,7 @@
             "Escape" = "mode default";
             "Return" = "mode default";
           };
+
           applications = {
             "s" = "exec steam; mode default;";
             "d" = "exec discord; mode default;";
@@ -146,6 +155,7 @@
             "Escape" = "mode default";
             "Return" = "mode default";
           };
+
           volume = {
             "k" = "exec pamixer -i 5 # Volume up";
             "j" = "exec pamixer -d 5 # Volume down";
@@ -153,13 +163,13 @@
             "Escape" = "mode default";
             "Return" = "mode default";
           };
+
           brightness = {
             "k" = "exec brightnessctl set 5%+ # Brightness up";
             "j" = "exec brightnessctl set 5%- # Brightness down";
             "Escape" = "mode default";
             "Return" = "mode default";
           };
-
         };
 
         startup = [

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -98,15 +98,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chuck = {
     isNormalUser = true;
@@ -148,12 +139,42 @@
     };
   };
 
+  # Configure keymap in X11
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
+  };
+
   # opengl and gpu support
   hardware = {
     graphics = {
       enable = true;
       enable32Bit = true;
     };
+
+    nvidia = {
+      modesetting.enable = true;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      powerManagement = {
+        enable = false;
+        finegrained = false;
+      };
+    };
+  };
+
+  environment.variables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    MOZ_ENABLE_WAYLAND = "1";
+    GBM_BACKEND = "nvidia-drm";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   # Enable the OpenSSH daemon.
