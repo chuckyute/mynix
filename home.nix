@@ -45,10 +45,9 @@
 
     fonts = {
       sizes = {
-        applications = 16;
-        terminal = 18;
-        desktop = 16;
-        popups = 16;
+        applications = 12;
+        desktop = 12;
+        popups = 12;
       };
     };
   };
@@ -56,7 +55,6 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     GIT_EDITOR = "nvim";
-    MOZ_SCALE_FACTOR = "1.2";
   };
 
   # Let Home Manager install and manage itself.

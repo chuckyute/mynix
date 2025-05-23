@@ -50,12 +50,13 @@
           ${left} = {
             mode = "1920x1080@60.000Hz";
             position = "0,0";
+            scale = "1.2";
           };
 
           ${right} = {
             mode = "2560x1440@143.995Hz";
-            position = "1440,0";
-            scale = "1.25";
+            position = "1600,0";
+            scale = "1.5";
           };
         };
 
