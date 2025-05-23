@@ -16,6 +16,7 @@
     wlogout
     networkmanagerapplet
     pavucontrol
+    swayest-workstyle
   ];
 
   home.sessionVariables = {
@@ -199,18 +200,14 @@
             '';
           }
           { command = "nm-applet --indicator"; }
+          { command = "sworkstyle &> /tmp/sworkstyle.log"; }
         ];
       };
   };
 
   services.mako = {
     enable = true;
-
-    settings = {
-      defaultTimeout = 5000;
-      borderSize = 2;
-      borderRadius = 5;
-    };
+    defaultTimeout = 5000;
   };
 
   home.file = {
