@@ -36,7 +36,6 @@
       };
       core.editor = "nvim";
     };
-
   };
 
   stylix = {
@@ -57,6 +56,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     GIT_EDITOR = "nvim";
+    MOZ_SCALE_FACTOR = "1.2";
   };
 
   # Let Home Manager install and manage itself.
