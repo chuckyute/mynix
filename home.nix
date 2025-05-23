@@ -38,13 +38,6 @@
     };
   };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
   stylix = {
     targets = {
       neovim.enable = false;
