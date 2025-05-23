@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -140,7 +145,7 @@
         ];
       };
       sway = {
-        default = [
+        default = lib.mkForce [
           "wlr"
           "gtk"
         ];
