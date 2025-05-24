@@ -99,24 +99,6 @@ lspconfig.lua_ls.setup({
 lspconfig.nixd.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-	settings = {
-		nixd = {
-			nixpkgs = {
-				expr = 'import (builtins.getFlake "github:chuckyute/mynix").inputs.nixpkgs { }',
-			},
-			options = {
-				nixos = {
-					expr = '(builtins.getFlake "github:chuckyute/mynix").nixosConfigurations.nixos.options',
-				},
-				home_manager = {
-					expr = '(builtins.getFlake "github:chuckyute/mynix").homeConfigurations.nixos.options',
-				},
-				stylix = {
-					expr = '(builtins.getFlake "github:chuckyute/mynix").homeConfigurations.nixos.options',
-				},
-			},
-		},
-	},
 })
 
 local gd_config = {

@@ -39,12 +39,17 @@
         browser = "firefox";
         left = "HDMI-A-4";
         right = "DP-4";
-        # menu = "rofi -show drun";
+        assignWorkspace = space: out: {
+          workspace = space;
+          output = out;
+        };
+        menu = "rofi -show drun";
+        lockCommand = "swaylock -f --show-failed-attempts";
         # fileManager = "thunar";
         # alt = "Mod1";
       in
       {
-        inherit modifier terminal;
+        inherit modifier terminal menu;
         bars = [ ];
 
         output = {
@@ -60,6 +65,22 @@
             scale = "1.5";
           };
         };
+
+        focus.followMouse = false;
+        defaultWorkspace = "workspace number 6";
+
+        workspaceOutputAssign = [
+          (assignWorkspace "1" left)
+          (assignWorkspace "2" left)
+          (assignWorkspace "3" left)
+          (assignWorkspace "4" left)
+          (assignWorkspace "5" left)
+          (assignWorkspace "6" right)
+          (assignWorkspace "7" right)
+          (assignWorkspace "8" right)
+          (assignWorkspace "9" right)
+          (assignWorkspace "0" right)
+        ];
 
         gaps = {
           inner = 5;
@@ -194,9 +215,10 @@
           {
             command = ''
               swayidle -w \
-              timeout 300 'swaylock -f -c 000000' \
-              timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-              before-sleep 'swaylock -f -c 000000'
+              timeout 900 '${lockCommand}' \
+              timeout 1200 'swaymsg "output * power off"' \
+              resume 'swaymsg "output * power on"' \
+              before-sleep '${lockCommand}'
             '';
           }
           { command = "nm-applet --indicator"; }
@@ -206,8 +228,8 @@
   };
 
   services.mako = {
+    settings.defaultTimeout = 5000;
     enable = true;
-    defaultTimeout = 5000;
   };
 
   home.file = {

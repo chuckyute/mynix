@@ -43,15 +43,45 @@
       #!/usr/bin/env bash
       set -e
       cd $HOME/mynix
+
+      # Debug information
+      echo "=== DEBUG INFO ==="
+      echo "Current user: $(whoami)"
+      echo "Current directory: $(pwd)"
+      echo "Git status:"
+      git status --porcelain
+      echo "Permissions on .git/objects:"
+      ls -la .git/objects | head -5
+      echo "Can write to .git/objects: $([ -w ".git/objects" ] && echo "YES" || echo "NO")"
+      echo "==================="
+
+      # Fix permissions if needed - check for root-owned subdirectories
+      if [ ! -w ".git/objects" ] || find .git/objects -type d ! -user $(whoami) | grep -q .; then
+        echo "Fixing repository permissions..."
+        sudo chown -R $(whoami):$(id -gn) .
+        sudo chmod -R u+rw .
+        echo "Permissions fixed. Re-checking:"
+        ls -la .git/objects | head -5
+      fi
+
       if ! git diff --quiet || ! git diff --staged --quiet; then
         echo "Committing Configuration changes..."
-        sudo git add .
+        echo "About to run: git add ."
+        git add . || {
+          echo "git add failed with exit code $?"
+          echo "Re-checking permissions:"
+          ls -la .git/objects | head -5
+          exit 1
+        }
         git commit
       fi
+
       echo "Building and switching to new configuration.."
       sudo nixos-rebuild switch --flake .#nixos
+
       echo "Pushing changes to repository..."
       git push
+
       echo "Rebuild and push completed successfully"
     '')
     (writeShellScriptBin "clean" ''

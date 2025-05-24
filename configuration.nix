@@ -23,7 +23,7 @@
         "nix-command"
         "flakes"
       ];
-      download-buffer-size = 512;
+      download-buffer-size = 2048;
       # optimise sharing of identical files in store
       auto-optimise-store = true;
     };
@@ -129,6 +129,8 @@
     enable = true;
     wrapperFeatures.gtk = true;
   };
+
+  security.polkit.enable = true;
 
   xdg.portal = {
     enable = true;
