@@ -4,3 +4,4 @@ todo
   proper window icons for workspaces
   move tray icons over
   weather and temperature module
+  remove right modules from left display
