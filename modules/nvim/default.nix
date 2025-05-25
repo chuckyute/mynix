@@ -60,6 +60,7 @@
             p.tree-sitter-bash
             p.tree-sitter-lua
             p.tree-sitter-json
+            p.tree-sitter-gdscript
           ])
         );
         type = "lua";
