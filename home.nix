@@ -20,6 +20,7 @@
     firefox-wayland
     xfce.thunar
     discord
+    godot
   ];
 
   programs.git = {

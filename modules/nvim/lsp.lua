@@ -101,15 +101,14 @@ lspconfig.nixd.setup({
 	capabilities = capabilities,
 })
 
-local gd_config = {
+lspconfig.gdscript.setup({
+	on_attach = on_attach,
 	capabilities = capabilities,
-	settings = {},
+	filetypes = { "gd", "gdscript" },
 	root_dir = require("lspconfig.util").root_pattern("project.godot", ".git"),
-}
-if vim.fn.has("win32") == 1 then
-	gd_config["cmd"] = { "ncat", "localhost", os.getenv("GDScript_Port") or "6005" }
-end
-lspconfig.gdscript.setup(gd_config)
+	-- Use OpenBSD netcat to connect to Godot's LSP server
+	cmd = { "nc", "localhost", "6005" },
+})
 
 -- Helper command to debug LSP status
 vim.api.nvim_create_user_command("LspDebug", function()

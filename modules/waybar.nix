@@ -25,11 +25,11 @@
         ];
         "sway/workspaces" = {
           "disable-scroll" = true;
-          "all-outputs" = true;
-          "format" = "{name}: {windows}";
-          "format-window-seperator" = " ";
+          "all-outputs" = false;
+          "format" = "{name}|{windows}";
+          "format-window-separator" = " ";
           "window-format" = "{icon}";
-          "window-rewrite-default" = "";
+          "window-rewrite-default" = "󰣆";
           "window-rewrite" =
             let
               mkAppRules =
@@ -59,7 +59,12 @@
             in
             lib.foldl' (acc: rules: acc // rules) { } [
               (mkAppRules "firefox" "")
-              (mkTitleRules [ ".*nvim.*" ".*vim.*" ] "")
+              (mkAppRules "discord" "")
+              (mkAppRules "ghostty" "󰊠")
+              (mkAppRules "steam" "")
+              (mkAppRules "godot" "")
+              (mkTitleRules [ "~.*" "/.*" ] "󰊠")
+              (mkTitleRules [ ".*nvim.*" ".*vim.*" ] "")
             ];
           # Format: workspace number followed by application indicators
         };
