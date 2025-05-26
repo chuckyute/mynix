@@ -35,17 +35,15 @@
       let
         modifier = "Mod4";
         terminal = "ghostty -e bash";
-        browser = "firefox";
         left = "HDMI-A-4";
         right = "DP-4";
+        menu = "rofi -show drun";
+        lockCommand = "swaylock -f --show-failed-attempts";
+
         assignWorkspace = space: out: {
           workspace = space;
           output = out;
         };
-        menu = "rofi -show drun";
-        lockCommand = "swaylock -f --show-failed-attempts";
-        # fileManager = "thunar";
-        # alt = "Mod1";
       in
       {
         inherit modifier terminal menu;
@@ -188,8 +186,9 @@
           applications = {
             "s" = "exec steam; mode default;";
             "d" = "exec discord; mode default;";
-            "f" = "exec ${browser}; mode default;";
+            "f" = "exec nautilus; mode default;";
             "g" = "exec godot; mode default;";
+            "b" = "exec qutebrowser; mode default;";
             "Escape" = "mode default";
             "Return" = "mode default";
           };

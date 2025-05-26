@@ -11,6 +11,7 @@
     ./modules/sway.nix
     ./modules/waybar.nix
     ./modules/scripts.nix
+    ./modules/nautilus.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -18,7 +19,6 @@
     nerd-fonts.code-new-roman
     github-cli
     firefox-wayland
-    xfce.thunar
     discord
     godot
   ];

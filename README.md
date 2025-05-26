@@ -5,3 +5,4 @@ todo
   weather and temperature module
   remove right modules from left display
   start applications in specific workspaces
+  try gruvbox through stylix + treesitter
