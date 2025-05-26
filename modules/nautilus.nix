@@ -4,6 +4,8 @@
     nautilus
     sushi
     file-roller
+    tracker
+    tracker-miners
   ];
 
   dconf.settings = {
