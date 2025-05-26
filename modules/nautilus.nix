@@ -11,6 +11,8 @@
       show-hidden-files = true;
       default-folder-viewer = "list-view";
       show-delete-permanently = true;
+      recursive-search = "always";
+      search-filter-time-type = "last_modified";
     };
 
     "org/gnome/nautilus/list-view" = {
@@ -27,7 +29,7 @@
 
   home.file.".config/gtk-3.0/bookmarks".text = ''
     file:///home/chuck/downloads Downloads
-    file:///home/chukc/pictures Pictures
+    file:///home/chuck/pictures Pictures
     file:///home/chuck/mynix NixOS Config
   '';
 }
