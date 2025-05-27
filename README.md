@@ -7,3 +7,5 @@ todo
   start applications in specific workspaces
   try gruvbox through stylix + treesitter
   fix open in terminal and open in file manager in godot
+  add better fzf and ripgrep functionality to yazi
+

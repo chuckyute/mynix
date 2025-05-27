@@ -11,6 +11,7 @@
     ./modules/sway.nix
     ./modules/waybar.nix
     ./modules/scripts.nix
+    ./modules/yazi.nix
   ];
 
   fonts.fontconfig.enable = true;
