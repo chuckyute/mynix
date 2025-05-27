@@ -11,7 +11,6 @@
     ./modules/sway.nix
     ./modules/waybar.nix
     ./modules/scripts.nix
-    ./modules/nautilus.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -21,6 +20,7 @@
     firefox-wayland
     discord
     godot
+    nautilus
   ];
 
   programs.git = {
