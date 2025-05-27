@@ -20,7 +20,6 @@
     firefox-wayland
     discord
     godot
-    nautilus
   ];
 
   programs.git = {
