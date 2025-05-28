@@ -13,61 +13,40 @@
         position = "top";
         height = 36;
         spacing = 6;
+
         modules-left = [
           "sway/workspaces"
           "sway/mode"
         ];
+
         modules-center = [ "sway/window" ];
+
         modules-right = [
           "pulseaudio"
           "clock"
           "tray"
         ];
+
         "sway/workspaces" = {
           "disable-scroll" = true;
+          "disable-markup" = false;
           "all-outputs" = false;
           "format" = "{name}|{windows}";
           "format-window-separator" = " ";
           "window-format" = "{icon}";
           "window-rewrite-default" = "󰣆";
-          "window-rewrite" =
-            let
-              mkAppRules =
-                name: icon:
-                let
-                  lower = lib.strings.toLower name;
-                  capital = lib.strings.concatStrings [
-                    (lib.strings.toUpper (lib.strings.substring 0 1 lower))
-                    (lib.strings.substring 1 (-1) lower)
-                  ];
-                in
-                {
-                  "class<${lower}>" = icon;
-                  "class<${capital}>" = icon;
-                  "app_id<${lower}>" = icon;
-                  "app_id<${capital}>" = icon;
-                };
-
-              mkTitleRules =
-                patterns: icon:
-                lib.listToAttrs (
-                  map (pattern: {
-                    name = "title<${pattern}>";
-                    value = icon;
-                  }) patterns
-                );
-            in
-            lib.foldl' (acc: rules: acc // rules) { } [
-              (mkAppRules "firefox" "")
-              (mkAppRules "discord" "")
-              (mkAppRules "ghostty" "󰊠")
-              (mkAppRules "steam" "")
-              (mkAppRules "godot" "")
-              (mkTitleRules [ "~.*" "/.*" ] "󰊠")
-              (mkTitleRules [ ".*nvim.*" ".*vim.*" ] "")
-            ];
-          # Format: workspace number followed by application indicators
+          # use swaymsg -t get_tree to see all window info
+          "window-rewrite" = {
+            "class<discord>" = "";
+            "class<steam>" = "";
+            "title<.*Godot.*>" = "<span size='large'></span>";
+            "title</.*>" = "󰊠";
+            "title<~.*>" = "󰊠";
+            "title<neovim>" = "";
+            "title<yazi>" = "";
+          };
         };
+
         "pulseaudio" = {
           format = "{volume}% {icon}";
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";

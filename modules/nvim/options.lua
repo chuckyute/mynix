@@ -37,6 +37,10 @@ vim.opt.inccommand = "split"
 vim.o.updatetime = 250
 vim.opt.timeoutlen = 300
 
+-- title for waybar
+vim.o.title = true
+vim.o.titlestring = "neovim"
+
 -- Keymaps
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 

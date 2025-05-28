@@ -186,7 +186,7 @@
           applications = {
             "s" = "exec steam; mode default;";
             "d" = "exec discord; mode default;";
-            "f" = "exec nautilus; mode default;";
+            "f" = "exec firefox; mode default;";
             "g" = "exec godot; mode default;";
             "b" = "exec qutebrowser; mode default;";
             "Escape" = "mode default";

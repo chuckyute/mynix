@@ -12,6 +12,7 @@
     settings = {
       manager = {
         show_hidden = true;
+        title_format = "yazi";
       };
 
       which = {
@@ -37,7 +38,7 @@
     };
 
     keymap = {
-      manager.prepend_keymap = [
+      manager.keymap = [
         {
           on = [ "j" ];
           run = "arrow next";
@@ -186,7 +187,6 @@
           run = "yank --cut";
           desc = "Cut files";
         }
-
         # Paste operations
         {
           on = [ "p" ];
@@ -197,6 +197,105 @@
           on = [ "P" ];
           run = "paste --force";
           desc = "Paste (overwrite)";
+        }
+        # tab operations
+        {
+          on = [
+            "t"
+            "n"
+          ];
+          run = "tab_create";
+          desc = "New tab";
+        }
+        {
+          on = [
+            "t"
+            "q"
+          ];
+          run = "tab_close";
+          desc = "Close tab";
+        }
+        {
+          on = [ "<Tab>" ];
+          run = "tab_switch --relative 1";
+          desc = "Next tab";
+        }
+        {
+          on = [ "<BackTab>" ];
+          run = "tab_switch --relative -1";
+          desc = "Prev tab";
+        }
+        {
+          on = [
+            "t"
+            "1"
+          ];
+          run = "tab_switch 0";
+          desc = "Switch to tab 1";
+        }
+        {
+          on = [
+            "t"
+            "2"
+          ];
+          run = "tab_switch 1";
+          desc = "Switch to tab 2";
+        }
+        {
+          on = [
+            "t"
+            "3"
+          ];
+          run = "tab_switch 2";
+          desc = "Switch to tab 3";
+        }
+        {
+          on = [
+            "t"
+            "4"
+          ];
+          run = "tab_switch 3";
+          desc = "Switch to tab 4";
+        }
+        {
+          on = [
+            "t"
+            "5"
+          ];
+          run = "tab_switch 4";
+          desc = "Switch to tab 5";
+        }
+        {
+          on = [
+            "t"
+            "6"
+          ];
+          run = "tab_switch 5";
+          desc = "Switch to tab 6";
+        }
+        {
+          on = [
+            "t"
+            "7"
+          ];
+          run = "tab_switch 6";
+          desc = "Switch to tab 7";
+        }
+        {
+          on = [
+            "t"
+            "8"
+          ];
+          run = "tab_switch 7";
+          desc = "Switch to tab 8";
+        }
+        {
+          on = [
+            "t"
+            "9"
+          ];
+          run = "tab_switch 8";
+          desc = "Switch to tab 9";
         }
         {
           on = [ "<Space>" ];
@@ -217,6 +316,16 @@
           desc = "Delete permanently";
         }
         {
+          on = [ ";" ];
+          run = "shell --interactive";
+          desc = "run shell command";
+        }
+        {
+          on = [ ":" ];
+          run = "shell --block --interactive";
+          desc = "run shell command (block until finished)";
+        }
+        {
           on = [ "<Enter>" ];
           run = "open";
           desc = "Open file";
@@ -230,15 +339,6 @@
           on = [ "?" ];
           run = "help";
           desc = "Show help";
-        }
-        {
-          on = [
-            "<Space>"
-            "s"
-            "x"
-          ];
-          run = "shell 'yazi-search-extract \"$1\"' --orphan --confirm";
-          desc = "Search extract";
         }
       ];
     };
