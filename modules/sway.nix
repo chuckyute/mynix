@@ -6,7 +6,7 @@
     mako
     wl-clipboard
     swayidle
-    swaylock
+    gtklock
     grim
     slurp
     swappy
@@ -35,10 +35,18 @@
       let
         modifier = "Mod4";
         terminal = "ghostty -e bash";
+        browser = "firefox";
         left = "HDMI-A-4";
         right = "DP-4";
         menu = "rofi -show drun";
-        lockCommand = "swaylock -f --show-failed-attempts";
+        lockCommand = "gtklock";
+        idleCommand = ''
+          swayidle -w \
+          timeout 900 '${lockCommand}' \
+          timeout 920 'swaymsg "output * power off"' \
+          resume 'swaymsg "output * power on"' \
+          before-sleep '${lockCommand}'
+        '';
 
         assignWorkspace = space: out: {
           workspace = space;
@@ -117,7 +125,6 @@
             ${mod "t"} = "exec ${terminal}";
             ${mod "q"} = "kill";
             ${modShift "e"} = "exec wlogout";
-            ${modShift "c"} = "exec swaylock";
             ${modShift "r"} = "reload";
             # window management
             ${mod "h"} = "focus left";
@@ -141,6 +148,9 @@
             # scratchpad
             ${modShift "minus"} = "move scratchpad";
             ${mod "minus"} = "scratchpad show";
+            # idle
+            ${mod "i"} = "exec pkill swayidle";
+            ${modShift "i"} = "exec ${idleCommand}";
             # workspaces
             ${mod "1"} = "workspace number 1";
             ${mod "2"} = "workspace number 2";
@@ -186,9 +196,9 @@
           applications = {
             "s" = "exec steam; mode default;";
             "d" = "exec discord; mode default;";
-            "f" = "exec firefox; mode default;";
+            #"f" = "exec firefox; mode default;";
             "g" = "exec godot; mode default;";
-            "b" = "exec qutebrowser; mode default;";
+            "b" = "exec ${browser}; mode default;";
             "Escape" = "mode default";
             "Return" = "mode default";
           };
@@ -210,15 +220,7 @@
         };
 
         startup = [
-          {
-            command = ''
-              swayidle -w \
-              timeout 900 '${lockCommand}' \
-              timeout 1200 'swaymsg "output * power off"' \
-              resume 'swaymsg "output * power on"' \
-              before-sleep '${lockCommand}'
-            '';
-          }
+          { command = idleCommand; }
           { command = "nm-applet --indicator"; }
         ];
       };
