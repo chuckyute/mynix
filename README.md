@@ -13,4 +13,7 @@ todo
   add different profiles to home manager
   add calculator and paint apps
   add tray icon for whether swayidle is running or not
+  make modules pretty
+  gtklock doesn't power off displays
+  fix notifications
 

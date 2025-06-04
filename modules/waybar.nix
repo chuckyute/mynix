@@ -1,12 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
-
   programs.waybar = {
     enable = true;
-    systemd = {
-      enable = true;
-      target = "sway-session.target";
-    };
+    systemd.enable = false;
     settings = {
       mainBar = {
         layer = "top";
@@ -24,6 +20,7 @@
         modules-right = [
           "pulseaudio"
           "clock"
+          "custom/swayidle-status"
           "tray"
         ];
 
@@ -57,6 +54,11 @@
           tooltip-format = "<big>{:%y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
 
+        "custom/swayidle-status" = {
+          "format" = "Idle: {}";
+          "exec" = "pgrep swayidle > /dev/null && echo ON || echo OFF";
+          "interval" = 1;
+        };
         "tray" = {
           spacing = 10;
           icon-size = 20;

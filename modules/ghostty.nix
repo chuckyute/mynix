@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-
+{ ... }:
 {
-  home.packages = [ pkgs.ghostty ];
-
   programs.ghostty = {
     enable = true;
     enableBashIntegration = true;

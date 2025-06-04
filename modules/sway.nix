@@ -1,19 +1,14 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    rofi-wayland
-    waybar
-    mako
     wl-clipboard
     swayidle
     gtklock
     grim
     slurp
     swappy
-    sov
     pamixer
     brightnessctl
-    wlogout
     networkmanagerapplet
     pavucontrol
   ];
@@ -35,10 +30,9 @@
       let
         modifier = "Mod4";
         terminal = "ghostty -e bash";
-        browser = "firefox";
+        browser = "google-chrome-stable";
         left = "HDMI-A-4";
         right = "DP-4";
-        menu = "rofi -show drun";
         lockCommand = "gtklock";
         idleCommand = ''
           swayidle -w \
@@ -54,7 +48,7 @@
         };
       in
       {
-        inherit modifier terminal menu;
+        inherit modifier terminal;
         bars = [ ];
 
         output = {
@@ -196,7 +190,6 @@
           applications = {
             "s" = "exec steam; mode default;";
             "d" = "exec discord; mode default;";
-            #"f" = "exec firefox; mode default;";
             "g" = "exec godot; mode default;";
             "b" = "exec ${browser}; mode default;";
             "Escape" = "mode default";
