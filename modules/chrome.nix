@@ -8,9 +8,9 @@
     commandLineArgs = [
       # Essential Wayland support
       "--enable-wayland-ime"
-      "--ozone-platform=wayland"
-      "--enable-features=WaylandWindowDecorations"
-
+      # "--ozone-platform=wayland"
+      #"--enable-features=WaylandWindowDecorations"
+      #
       # NVIDIA optimizations
       "--enable-gpu-rasterization"
       "--enable-zero-copy"

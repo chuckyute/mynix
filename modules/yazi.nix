@@ -34,6 +34,58 @@
           }
         ];
       };
+      # File association rules - this is the key part
+      open = {
+        rules = [
+          # Archive files use extract workflow when pressing Enter
+          {
+            mime = "application/zip";
+            use = [ "extract" ];
+          }
+          {
+            mime = "application/gzip";
+            use = [ "extract" ];
+          }
+          {
+            mime = "application/x-tar";
+            use = [ "extract" ];
+          }
+          {
+            mime = "application/x-7z-compressed";
+            use = [ "extract" ];
+          }
+          {
+            mime = "application/x-rar";
+            use = [ "extract" ];
+          }
+
+          # Pattern-based matching (more reliable than MIME)
+          {
+            name = "*.zip";
+            use = [ "extract" ];
+          }
+          {
+            name = "*.tar.gz";
+            use = [ "extract" ];
+          }
+          {
+            name = "*.tgz";
+            use = [ "extract" ];
+          }
+          {
+            name = "*.tar.xz";
+            use = [ "extract" ];
+          }
+          {
+            name = "*.7z";
+            use = [ "extract" ];
+          }
+          {
+            name = "*.rar";
+            use = [ "extract" ];
+          }
+        ];
+      };
     };
 
     keymap = {
