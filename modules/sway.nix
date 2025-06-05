@@ -215,6 +215,7 @@
         startup = [
           { command = idleCommand; }
           { command = "nm-applet --indicator"; }
+          { command = "waybar"; }
         ];
       };
   };
