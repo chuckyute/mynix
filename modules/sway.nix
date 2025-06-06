@@ -29,7 +29,7 @@
     config =
       let
         modifier = "Mod4";
-        terminalCommand = "ghostty -e bash";
+        terminal = "ghostty";
         terminalAppId = "com.mitchellh.ghostty";
         browserCommand = "google-chrome-stable";
         browserClass = "Google-chrome";
@@ -60,7 +60,7 @@
         };
       in
       {
-        inherit modifier terminalCommand;
+        inherit modifier terminal;
         bars = [ ];
 
         output = {
@@ -135,7 +135,7 @@
             modShift = key: "${modifier}+Shift+${key}";
           in
           {
-            ${mod "t"} = "exec ${terminalCommand}";
+            ${mod "t"} = "exec ${terminal} -e bash";
             ${mod "q"} = "kill";
             ${modShift "e"} = "exec wlogout";
             ${modShift "r"} = "reload";
