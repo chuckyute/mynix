@@ -92,21 +92,32 @@
           border = 2;
           hideEdgeBorders = "smart";
           titlebar = false;
+
+          commands =
+            let
+              enableFloating = criteria: {
+                inherit criteria;
+                command = "floating enable";
+              };
+              disableFloating = criteria: {
+                inherit criteria;
+                command = "floating disable";
+              };
+            in
+            [
+              (enableFloating { class = ".*"; })
+              (enableFloating { app_id = ".*"; })
+              # Override
+              (disableFloating { app_id = "com.mitchellh.ghostty"; })
+              (disableFloating { class = "Google-chrome"; })
+              (disableFloating { class = "discord"; })
+              (disableFloating { class = "steam"; })
+            ];
         };
 
         floating = {
           titlebar = true;
           border = 2;
-
-          criteria = [
-            { app_id = "^pavucontrol$"; }
-            { class = "^pavucontrol$"; }
-            { title = "^Volume Control$"; }
-            { app_id = "^nm-connection-editor$"; }
-            { class = "^Lxappearance$"; }
-            { app_id = "^blueberry.py$"; }
-            { title = "^Picture-in-Picture$"; }
-          ];
         };
 
         keybindings =
