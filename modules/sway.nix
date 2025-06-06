@@ -29,8 +29,12 @@
     config =
       let
         modifier = "Mod4";
-        terminal = "ghostty -e bash";
-        browser = "google-chrome-stable";
+        terminalCommand = "ghostty -e bash";
+        terminalAppId = "com.mitchellh.ghostty";
+        browserCommand = "google-chrome-stable";
+        browserClass = "Google-chrome";
+        discordClass = "discord";
+        steamClass = "steam";
         left = "HDMI-A-4";
         right = "DP-4";
         lockCommand = "gtklock";
@@ -46,9 +50,17 @@
           workspace = space;
           output = out;
         };
+        enableFloating = criteria: {
+          inherit criteria;
+          command = "floating enable";
+        };
+        disableFloating = criteria: {
+          inherit criteria;
+          command = "floating disable";
+        };
       in
       {
-        inherit modifier terminal;
+        inherit modifier terminalCommand;
         bars = [ ];
 
         output = {
@@ -81,6 +93,13 @@
           (assignWorkspace "0" right)
         ];
 
+        assigns = {
+          "0" = [ { class = steamClass; } ];
+          "1" = [ { class = browserClass; } ];
+          "2" = [ { class = discordClass; } ];
+          "3" = [ { title = ".*Godot.*"; } ];
+        };
+
         gaps = {
           inner = 5;
           outer = 0;
@@ -93,26 +112,15 @@
           hideEdgeBorders = "smart";
           titlebar = false;
 
-          commands =
-            let
-              enableFloating = criteria: {
-                inherit criteria;
-                command = "floating enable";
-              };
-              disableFloating = criteria: {
-                inherit criteria;
-                command = "floating disable";
-              };
-            in
-            [
-              (enableFloating { class = ".*"; })
-              (enableFloating { app_id = ".*"; })
-              # Override
-              (disableFloating { app_id = "com.mitchellh.ghostty"; })
-              (disableFloating { class = "Google-chrome"; })
-              (disableFloating { class = "discord"; })
-              (disableFloating { class = "steam"; })
-            ];
+          commands = [
+            (enableFloating { class = ".*"; })
+            (enableFloating { app_id = ".*"; })
+            # Override
+            (disableFloating { app_id = terminalAppId; })
+            (disableFloating { class = browserClass; })
+            (disableFloating { class = discordClass; })
+            (disableFloating { class = steamClass; })
+          ];
         };
 
         floating = {
@@ -127,7 +135,7 @@
             modShift = key: "${modifier}+Shift+${key}";
           in
           {
-            ${mod "t"} = "exec ${terminal}";
+            ${mod "t"} = "exec ${terminalCommand}";
             ${mod "q"} = "kill";
             ${modShift "e"} = "exec wlogout";
             ${modShift "r"} = "reload";
@@ -202,7 +210,7 @@
             "s" = "exec steam; mode default;";
             "d" = "exec discord; mode default;";
             "g" = "exec godot; mode default;";
-            "b" = "exec ${browser}; mode default;";
+            "b" = "exec ${browserCommand}; mode default;";
             "Escape" = "mode default";
             "Return" = "mode default";
           };
@@ -227,6 +235,9 @@
           { command = idleCommand; }
           { command = "nm-applet --indicator"; }
           { command = "waybar"; }
+          { command = browserCommand; }
+          { command = "discord"; }
+          { command = "sleep 3 && steam"; }
         ];
       };
   };
