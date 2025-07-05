@@ -6,19 +6,24 @@
 
     # Optimized for your Wayland/Sway/NVIDIA setup
     commandLineArgs = [
-      # Essential Wayland support
-      "--enable-wayland-ime"
-      # "--ozone-platform=wayland"
-      #"--enable-features=WaylandWindowDecorations"
-      #
-      # NVIDIA optimizations
+      # Force hardware acceleration
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
       "--ignore-gpu-blocklist"
+      "--ignore-gpu-blacklist"
+      "--disable-gpu-driver-bug-workarounds"
 
-      # General improvements
+      # Better Wayland support (REMOVE the old VAAPI flags)
+      "--enable-features=WaylandWindowDecorations,VaapiVideoDecodeLinuxGL"
+      "--ozone-platform=wayland"
+      "--use-gl=desktop" # Changed from egl
+
+      # Performance optimizations
       "--enable-smooth-scrolling"
-      "--disable-features=UseChromeOSDirectVideoDecoder"
+      "--enable-hardware-overlays"
+
+      # Force hardware acceleration even if blocklisted
+      "--ignore-gpu-sandbox-failures"
     ];
   };
 

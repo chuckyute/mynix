@@ -44,6 +44,23 @@
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
   };
+  # makes it so that sudo permission persists for a while
+  security.sudo = {
+    enable = true;
+
+    extraRules = [
+      # Allow execution of any command by all users in group sudo,
+      # requiring a password.
+      {
+        groups = [ "wheel" ];
+        commands = [ "ALL" ];
+      }
+    ];
+
+    extraConfig = ''
+      Defaults timestamp_timeout=60
+    '';
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # disable wpa-supplicant since we're using NetworkManager

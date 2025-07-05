@@ -20,7 +20,6 @@
         modules-right = [
           "pulseaudio"
           "clock"
-          "custom/swayidle-status"
           "tray"
         ];
 
@@ -45,7 +44,7 @@
         };
 
         "pulseaudio" = {
-          format = "{volume}% {icon}";
+          format = "󰕾 {volume}%";
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
         };
 
@@ -54,11 +53,6 @@
           tooltip-format = "<big>{:%y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
 
-        "custom/swayidle-status" = {
-          "format" = "Idle: {}";
-          "exec" = "pgrep swayidle > /dev/null && echo ON || echo OFF";
-          "interval" = 1;
-        };
         "tray" = {
           spacing = 10;
           icon-size = 20;

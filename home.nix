@@ -21,6 +21,7 @@
     github-cli
     discord
     godot
+    vlc
   ];
 
   programs.git = {
@@ -54,8 +55,19 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
-    GIT_EDITOR = "nvim";
+    # Force Wayland for Chrome
+    NIXOS_OZONE_WL = "1";
+    XDG_SESSION_TYPE = "wayland";
+
+    # NVIDIA specific
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+    # Disable problematic compositor features
+    WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+
+    # Force hardware acceleration
+    LIBGL_ALWAYS_INDIRECT = "0";
   };
 
   # Let Home Manager install and manage itself.

@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     wl-clipboard
     swayidle
-    gtklock
     grim
     slurp
     swappy
@@ -12,13 +11,6 @@
     networkmanagerapplet
     pavucontrol
   ];
-
-  home.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };
 
   wayland.windowManager.sway = {
     enable = true;
@@ -32,18 +24,15 @@
         terminal = "ghostty";
         terminalAppId = "com.mitchellh.ghostty";
         browserCommand = "google-chrome-stable";
-        browserClass = "Google-chrome";
+        browserAppId = "google-chrome";
         discordClass = "discord";
         steamClass = "steam";
         left = "HDMI-A-4";
         right = "DP-4";
-        lockCommand = "gtklock";
         idleCommand = ''
           swayidle -w \
-          timeout 900 '${lockCommand}' \
-          timeout 920 'swaymsg "output * power off"' \
+          timeout 900 'swaymsg "output * power off"' \
           resume 'swaymsg "output * power on"' \
-          before-sleep '${lockCommand}'
         '';
 
         assignWorkspace = space: out: {
@@ -72,7 +61,7 @@
 
           ${right} = {
             mode = "2560x1440@143.995Hz";
-            position = "1600,0";
+            position = "1601,0";
             scale = "1.5";
           };
         };
@@ -95,9 +84,8 @@
 
         assigns = {
           "0" = [ { class = steamClass; } ];
-          "1" = [ { class = browserClass; } ];
+          "1" = [ { app_id = browserAppId; } ];
           "2" = [ { class = discordClass; } ];
-          "3" = [ { title = ".*Godot.*"; } ];
         };
 
         gaps = {
@@ -117,9 +105,8 @@
             (enableFloating { app_id = ".*"; })
             # Override
             (disableFloating { app_id = terminalAppId; })
-            (disableFloating { class = browserClass; })
+            (disableFloating { app_id = browserAppId; })
             (disableFloating { class = discordClass; })
-            (disableFloating { class = steamClass; })
           ];
         };
 

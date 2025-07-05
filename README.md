@@ -1,10 +1,6 @@
 todo
-  make it so that one sudo saves your password for a long time
-  discord, browser, and steam on startup
   move tray icons over
   weather and temperature module
-  remove right modules from left display
-  start applications in specific workspaces
   try gruvbox through stylix + treesitter
   fix open in terminal and open in file manager in godot
   add better fzf and ripgrep functionality to yazi
@@ -12,8 +8,11 @@ todo
   mouse support for yazi
   add different profiles to home manager
   add calculator and paint apps
+  try out screenshots
   add tray icon for whether swayidle is running or not
-  make modules pretty
+  change swayidle to just dim the screens
   gtklock doesn't power off displays
+  make modules pretty
   fix notifications
+  left display needs to be moved over a couple pixels
 
