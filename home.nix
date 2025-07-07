@@ -41,10 +41,6 @@
   };
 
   stylix = {
-    targets = {
-      neovim.enable = false;
-    };
-
     fonts = {
       sizes = {
         applications = 12;

@@ -13,7 +13,6 @@
       nixfmt-rfc-style
     ];
     plugins = with pkgs.vimPlugins; [
-      gruvbox-nvim
       comment-nvim
       lualine-nvim
       gitsigns-nvim
