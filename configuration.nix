@@ -235,6 +235,63 @@
 
   programs.appimage = {
     enable = true;
+    # Add all the missing libraries that shadps4 needs
+    package = pkgs.appimage-run.override {
+      extraPkgs =
+        pkgs: with pkgs; [
+          # Basic system libraries
+          zlib
+          stdenv.cc.cc.lib # For libstdc++.so.6
+          glibc
+
+          # Graphics libraries
+          libGL
+          libGLU
+          mesa
+          libglvnd # Provides libGLX.so.0 and libOpenGL.so.0
+          libEGL
+
+          # X11 and windowing
+          xorg.libX11
+          xorg.libX11_xcb
+          xorg.libxcb
+          xorg.libXext
+          xorg.libXrender
+          xorg.libXrandr
+          xorg.libXinerama
+          xorg.libXi
+          xorg.libXcursor
+          xorg.libXcomposite
+          xorg.libXdamage
+          xorg.libXfixes
+          xorg.libXScrnSaver
+
+          # Font libraries
+          fontconfig
+          freetype
+          harfbuzz
+
+          # Audio libraries (for PipeWire/audio support)
+          pipewire
+          alsa-lib
+          pulseaudio
+
+          # Crypto and other utilities
+          libcom_err
+          libgpg_error
+          gmp
+
+          # Vulkan support
+          vulkan-loader
+          vulkan-validation-layers
+
+          # Additional libraries often needed by games/emulators
+          libusb1
+          udev
+          dbus
+          systemd
+        ];
+    };
     binfmt = true;
   };
 
