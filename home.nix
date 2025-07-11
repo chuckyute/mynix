@@ -24,6 +24,7 @@
     vlc
     appimage-run
     unzip
+    shadps4
   ];
 
   programs.git = {
