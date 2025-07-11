@@ -22,6 +22,7 @@
     discord
     godot
     vlc
+    appimage-run
   ];
 
   programs.git = {

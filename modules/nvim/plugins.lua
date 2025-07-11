@@ -1,7 +1,6 @@
 -- Configure existing plugins
 require("lualine").setup({
 	icons_enabled = true,
-	theme = "gruvbox",
 })
 
 require("Comment").setup({})
