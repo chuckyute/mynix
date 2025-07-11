@@ -23,6 +23,7 @@
     godot
     vlc
     appimage-run
+    unzip
   ];
 
   programs.git = {
