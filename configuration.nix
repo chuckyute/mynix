@@ -233,6 +233,11 @@
     gamescopeSession.enable = true;
   };
 
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   programs.gamescope.enable = true;
 
   environment.variables = {
