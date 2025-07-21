@@ -21,7 +21,9 @@
     github-cli
     discord
     godot
+    firefox-wayland
     vlc
+    unzip
   ];
 
   programs.git = {
