@@ -23,10 +23,10 @@
         modifier = "Mod4";
         terminal = "ghostty";
         terminalAppId = "com.mitchellh.ghostty";
-        browserCommand = "google-chrome-stable";
-        browserAppId = "google-chrome";
+        browserCommand = "firefox";
+        browserAppId = "firefox";
         discordClass = "discord";
-        steamClass = "steam";
+        steamClass = "google-chrome-stablesteam";
         left = "HDMI-A-4";
         right = "DP-4";
         idleCommand = ''
