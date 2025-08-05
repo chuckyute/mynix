@@ -16,7 +16,7 @@
   };
 
   outputs =
-    { nixpkgs }@inputs:
+    { self, nixpkgs }@inputs:
     let
       system = "x86_64-linux";
     in
