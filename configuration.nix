@@ -23,7 +23,7 @@
         "nix-command"
         "flakes"
       ];
-      download-buffer-size = 2048;
+      download-buffer-size = 4096;
       # optimise sharing of identical files in store
       auto-optimise-store = true;
     };

@@ -12,7 +12,6 @@
     ./modules/waybar.nix
     ./modules/scripts.nix
     ./modules/yazi.nix
-    ./modules/chrome.nix
   ];
 
   fonts.fontconfig.enable = true;
