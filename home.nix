@@ -41,7 +41,6 @@
   };
 
   stylix = {
-    enable = true;
 
     fonts = {
       sizes = {
