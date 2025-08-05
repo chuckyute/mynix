@@ -1,7 +1,6 @@
 todo
   move tray icons over
   weather and temperature module
-  try gruvbox through stylix + treesitter
   fix open in terminal and open in file manager in godot
   add better fzf and ripgrep functionality to yazi
   look at plugins for yazi

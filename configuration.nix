@@ -138,6 +138,7 @@
     iw
     wget
     curl
+    firefox-wayland
   ];
 
   services.displayManager.ly.enable = true;
