@@ -41,6 +41,8 @@
   };
 
   stylix = {
+    enable = true;
+
     fonts = {
       sizes = {
         applications = 12;
