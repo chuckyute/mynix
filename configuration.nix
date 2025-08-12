@@ -140,7 +140,7 @@
     wget
     curl
     firefox-wayland
-    libva-nvidia-driver # For hardware video acceleration
+    nvidia-vaapi-driver # For hardware video acceleration
   ];
 
   services.displayManager.ly.enable = true;
