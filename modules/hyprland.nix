@@ -89,12 +89,12 @@
       windowrulev2 = [
         # Float all windows by default
         "float, class:.*"
-        
+
         # Override - tile specific applications
         "tile, class:(com.mitchellh.ghostty)"
         "tile, class:(firefox)"
         "tile, class:(discord)"
-        
+
         # Application assignments
         "workspace 10, class:(steam)"
         "workspace 1, class:(firefox)"
@@ -108,7 +108,7 @@
         "SUPER, q, killactive"
         "SUPER SHIFT, e, exec, wlogout"
         "SUPER SHIFT, r, exec, hyprctl reload"
-        
+
         # Window management
         "SUPER, h, movefocus, l"
         "SUPER, j, movefocus, d"
@@ -118,7 +118,7 @@
         "SUPER SHIFT, j, movewindow, d"
         "SUPER SHIFT, k, movewindow, u"
         "SUPER SHIFT, l, movewindow, r"
-        
+
         # Layout
         "SUPER, b, togglesplit"
         "SUPER, v, togglesplit"
@@ -129,11 +129,11 @@
         "SUPER, o, movecurrentworkspacetomonitor, +1"
         "SUPER SHIFT, space, togglefloating"
         "SUPER, space, cyclenext"
-        
+
         # Scratchpad (using special workspace)
         "SUPER SHIFT, minus, movetoworkspace, special:scratchpad"
         "SUPER, minus, togglespecialworkspace, scratchpad"
-        
+
         # Workspaces
         "SUPER, 1, workspace, 1"
         "SUPER, 2, workspace, 2"
@@ -155,11 +155,11 @@
         "SUPER SHIFT, 8, movetoworkspace, 8"
         "SUPER SHIFT, 9, movetoworkspace, 9"
         "SUPER SHIFT, 0, movetoworkspace, 10"
-        
+
         # Screenshots
         "SUPER, p, exec, grim -g \"$(slurp)\" - | swappy -f -"
         "SUPER SHIFT, p, exec, grim -g \"$(slurp)\" - | wl-copy"
-        
+
         # Submaps for modes
         "SUPER SHIFT, b, submap, brightness"
         "SUPER SHIFT, v, submap, volume"
@@ -228,8 +228,6 @@
     bind = , return, submap, reset
     submap = reset
   '';
-    };
-  };
 
   # Hypridle configuration for power management
   services.hypridle = {
