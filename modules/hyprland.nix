@@ -257,7 +257,7 @@
   # Mako notifications
   services.mako = {
     enable = true;
-    default-timeout = 5000;
+    settings.default-timeout = 5000;
   };
 
   # Screenshot directory
