@@ -44,9 +44,9 @@
 
     fonts = {
       sizes = {
-        applications = 12;
-        desktop = 12;
-        popups = 12;
+        applications = 18;
+        desktop = 18;
+        popups = 18;
       };
     };
   };

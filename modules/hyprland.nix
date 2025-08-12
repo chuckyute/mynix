@@ -21,8 +21,8 @@
     settings = {
       # Monitor configuration
       monitor = [
-        "HDMI-A-4, 1920x1080@60, 0x0, 1.0"
-        "DP-4, 2560x1440@143.995, 1920x0, 1.0"
+        "HDMI-A-4, 1920x1080@99.65, 0x0, 0.8"
+        "DP-4, 2560x1440@144, auto-right, 1.0"
       ];
 
       # Environment variables (Hyprland-specific ones only)
@@ -49,11 +49,8 @@
       # Decoration
       decoration = {
         rounding = 5;
-        blur = {
-          enabled = true;
-          size = 3;
-          passes = 1;
-        };
+        blur.enabled = false;
+        shadow.enabled = false;
       };
 
       # Animations (disabled for performance)
@@ -68,6 +65,7 @@
 
       # Misc settings
       misc = {
+        vfr = true;
         disable_hyprland_logo = true;
       };
 

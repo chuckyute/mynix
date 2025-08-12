@@ -6,7 +6,7 @@
 
     settings = {
       font-family = "CodeNewRoman Nerd Font";
-      font-size = 13;
+      font-size = 19;
     };
   };
 }
