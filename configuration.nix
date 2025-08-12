@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  lib,
+  inputs,
   ...
 }:
 {
@@ -44,6 +44,7 @@
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
   };
+
   # makes it so that sudo permission persists for a while
   security.sudo = {
     enable = true;
@@ -122,7 +123,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.chuck = {
     isNormalUser = true;
     description = "Charles";
@@ -139,45 +140,28 @@
     wget
     curl
     firefox-wayland
+    libva-nvidia-driver # For hardware video acceleration
   ];
 
   services.displayManager.ly.enable = true;
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
+  # Hyprland is enabled via the flake module
+  # No need to explicitly enable here when using the flake
 
   security.polkit.enable = true;
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-
     extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
+      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
-
-    config = {
-      common = {
-        default = [
-          "wlr"
-          "gtk"
-        ];
-      };
-
-      sway = {
-        default = lib.mkForce [
-          "wlr"
-          "gtk"
-        ];
-
-        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-      };
-    };
+    config.common.default = [
+      "hyprland"
+      "gtk"
+    ];
   };
+
   # audio
   security.rtkit.enable = true;
 
@@ -220,7 +204,7 @@
       package = config.boot.kernelPackages.nvidiaPackages.beta;
 
       powerManagement = {
-        enable = false;
+        enable = true; # Enable for suspend/resume support
         finegrained = false;
       };
     };
@@ -245,7 +229,6 @@
     LIBVA_DRIVER_NAME = "nvidia";
     MOZ_ENABLE_WAYLAND = "1";
     GBM_BACKEND = "nvidia-drm";
-    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   # Enable the OpenSSH daemon.

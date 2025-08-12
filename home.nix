@@ -8,7 +8,7 @@
   imports = [
     ./modules/ghostty.nix
     ./modules/nvim
-    ./modules/sway.nix
+    ./modules/hyprland.nix # Changed from sway.nix to hyprland.nix
     ./modules/waybar.nix
     ./modules/scripts.nix
     ./modules/yazi.nix

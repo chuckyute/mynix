@@ -11,11 +11,11 @@
         spacing = 6;
 
         modules-left = [
-          "sway/workspaces"
-          "sway/mode"
+          "hyprland/workspaces"
+          "hyprland/submap"
         ];
 
-        modules-center = [ "sway/window" ];
+        modules-center = [ "hyprland/window" ];
 
         modules-right = [
           "pulseaudio"
@@ -23,24 +23,36 @@
           "tray"
         ];
 
-        "sway/workspaces" = {
+        "hyprland/workspaces" = {
           "disable-scroll" = true;
-          "disable-markup" = false;
           "all-outputs" = false;
-          "format" = "{name}|{windows}";
+          "warp-on-scroll" = false;
+          "format" = "{name}: {windows}";
           "format-window-separator" = " ";
-          "window-format" = "{icon}";
           "window-rewrite-default" = "󰣆";
-          # use swaymsg -t get_tree to see all window info
           "window-rewrite" = {
-            "class<discord>" = "";
-            "class<steam>" = "";
-            "title<.*Godot.*>" = "<span size='large'></span>";
+            "class<discord>" = "";
+            "class<steam>" = "";
+            "title<.*Godot.*>" = "<span size='large'></span>";
             "title</.*>" = "󰊠";
             "title<~.*>" = "󰊠";
-            "title<neovim>" = "";
-            "title<yazi>" = "";
+            "title<neovim>" = "";
+            "title<yazi>" = "";
+            "class<com.mitchellh.ghostty>" = "󰊠";
+            "class<firefox>" = "";
           };
+        };
+
+        "hyprland/submap" = {
+          "format" = "✌️ {}";
+          "max-length" = 8;
+          "tooltip" = false;
+        };
+
+        "hyprland/window" = {
+          "format" = "{}";
+          "max-length" = 50;
+          "separate-outputs" = true;
         };
 
         "pulseaudio" = {
