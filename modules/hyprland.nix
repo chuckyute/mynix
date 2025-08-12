@@ -102,77 +102,75 @@
       ];
 
       # Keybindings
-      "$mod" = "SUPER";
-
       bind = [
         # Application launchers
-        "$mod, t, exec, ghostty -e bash"
-        "$mod, q, killactive"
-        "$mod SHIFT, e, exec, wlogout"
-        "$mod SHIFT, r, exec, hyprctl reload"
+        "SUPER, t, exec, ghostty -e bash"
+        "SUPER, q, killactive"
+        "SUPER SHIFT, e, exec, wlogout"
+        "SUPER SHIFT, r, exec, hyprctl reload"
 
         # Window management
-        "$mod, h, movefocus, l"
-        "$mod, j, movefocus, d"
-        "$mod, k, movefocus, u"
-        "$mod, l, movefocus, r"
-        "$mod SHIFT, h, movewindow, l"
-        "$mod SHIFT, j, movewindow, d"
-        "$mod SHIFT, k, movewindow, u"
-        "$mod SHIFT, l, movewindow, r"
+        "SUPER, h, movefocus, l"
+        "SUPER, j, movefocus, d"
+        "SUPER, k, movefocus, u"
+        "SUPER, l, movefocus, r"
+        "SUPER SHIFT, h, movewindow, l"
+        "SUPER SHIFT, j, movewindow, d"
+        "SUPER SHIFT, k, movewindow, u"
+        "SUPER SHIFT, l, movewindow, r"
 
         # Layout
-        "$mod, b, togglesplit"
-        "$mod, v, togglesplit"
-        "$mod, s, pseudo"
-        "$mod, w, pseudo"
-        "$mod, e, togglesplit"
-        "$mod, f, fullscreen, 0"
-        "$mod, o, movecurrentworkspacetomonitor, +1"
-        "$mod SHIFT, space, togglefloating"
-        "$mod, space, cyclenext"
+        "SUPER, b, togglesplit"
+        "SUPER, v, togglesplit"
+        "SUPER, s, pseudo"
+        "SUPER, w, pseudo"
+        "SUPER, e, togglesplit"
+        "SUPER, f, fullscreen, 0"
+        "SUPER, o, movecurrentworkspacetomonitor, +1"
+        "SUPER SHIFT, space, togglefloating"
+        "SUPER, space, cyclenext"
 
         # Scratchpad (using special workspace)
-        "$mod SHIFT, minus, movetoworkspace, special:scratchpad"
-        "$mod, minus, togglespecialworkspace, scratchpad"
+        "SUPER SHIFT, minus, movetoworkspace, special:scratchpad"
+        "SUPER, minus, togglespecialworkspace, scratchpad"
 
         # Workspaces
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod, 6, workspace, 6"
-        "$mod, 7, workspace, 7"
-        "$mod, 8, workspace, 8"
-        "$mod, 9, workspace, 9"
-        "$mod, 0, workspace, 10"
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
-        "$mod SHIFT, 6, movetoworkspace, 6"
-        "$mod SHIFT, 7, movetoworkspace, 7"
-        "$mod SHIFT, 8, movetoworkspace, 8"
-        "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod SHIFT, 0, movetoworkspace, 10"
+        "SUPER, 1, workspace, 1"
+        "SUPER, 2, workspace, 2"
+        "SUPER, 3, workspace, 3"
+        "SUPER, 4, workspace, 4"
+        "SUPER, 5, workspace, 5"
+        "SUPER, 6, workspace, 6"
+        "SUPER, 7, workspace, 7"
+        "SUPER, 8, workspace, 8"
+        "SUPER, 9, workspace, 9"
+        "SUPER, 0, workspace, 10"
+        "SUPER SHIFT, 1, movetoworkspace, 1"
+        "SUPER SHIFT, 2, movetoworkspace, 2"
+        "SUPER SHIFT, 3, movetoworkspace, 3"
+        "SUPER SHIFT, 4, movetoworkspace, 4"
+        "SUPER SHIFT, 5, movetoworkspace, 5"
+        "SUPER SHIFT, 6, movetoworkspace, 6"
+        "SUPER SHIFT, 7, movetoworkspace, 7"
+        "SUPER SHIFT, 8, movetoworkspace, 8"
+        "SUPER SHIFT, 9, movetoworkspace, 9"
+        "SUPER SHIFT, 0, movetoworkspace, 10"
 
         # Screenshots
-        "$mod, p, exec, grim -g \"$(slurp)\" - | swappy -f -"
-        "$mod SHIFT, p, exec, grim -g \"$(slurp)\" - | wl-copy"
+        "SUPER, p, exec, grim -g \"$(slurp)\" - | swappy -f -"
+        "SUPER SHIFT, p, exec, grim -g \"$(slurp)\" - | wl-copy"
 
         # Submaps for modes
-        "$mod SHIFT, b, submap, brightness"
-        "$mod SHIFT, v, submap, volume"
-        "$mod, a, submap, applications"
-        "$mod, r, submap, resize"
+        "SUPER SHIFT, b, submap, brightness"
+        "SUPER SHIFT, v, submap, volume"
+        "SUPER, a, submap, applications"
+        "SUPER, r, submap, resize"
       ];
 
       # Mouse bindings
       bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
+        "SUPER, mouse:272, movewindow"
+        "SUPER, mouse:273, resizewindow"
       ];
 
       # Submaps (modes)
