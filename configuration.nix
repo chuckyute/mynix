@@ -145,8 +145,12 @@
 
   services.displayManager.ly.enable = true;
 
-  # Hyprland is enabled via the flake module
-  # No need to explicitly enable here when using the flake
+  # Enable Hyprland (required for session to appear in display manager)
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    xwayland.enable = true;
+  };
 
   security.polkit.enable = true;
 
