@@ -118,7 +118,7 @@
         "$mod, t, exec, ghostty -e bash"
         "$mod, q, killactive"
         "$mod SHIFT, e, exec, wlogout"
-        "$mod SHIFT, r, reload"
+        "$mod SHIFT, r, exec, hyprctl reload"
 
         # Window management
         "$mod, h, movefocus, l"
@@ -257,7 +257,7 @@
   # Mako notifications
   services.mako = {
     enable = true;
-    settings.default-timeout = 5000;
+    defaultTimeout = 5000;
   };
 
   # Screenshot directory
