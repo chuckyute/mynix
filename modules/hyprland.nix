@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     wl-clipboard
-    inputs.hyprland.packages.${pkgs.system}.hypridle
+    hypridle
     grim
     slurp
     swappy
@@ -243,7 +243,6 @@
   # Hypridle configuration for power management
   services.hypridle = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hypridle;
     settings = {
       listener = [
         {
