@@ -188,13 +188,9 @@
         # Applications mode
         "applications"
         "bind = , s, exec, steam"
-        "bind = , s, submap, reset"
         "bind = , d, exec, discord"
-        "bind = , d, submap, reset"
         "bind = , g, exec, godot"
-        "bind = , g, submap, reset"
         "bind = , b, exec, firefox"
-        "bind = , b, submap, reset"
         "bind = , escape, submap, reset"
         "bind = , return, submap, reset"
         "submap = reset"
