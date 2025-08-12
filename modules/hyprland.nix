@@ -89,12 +89,12 @@
       windowrulev2 = [
         # Float all windows by default
         "float, class:.*"
-
+        
         # Override - tile specific applications
         "tile, class:(com.mitchellh.ghostty)"
         "tile, class:(firefox)"
         "tile, class:(discord)"
-
+        
         # Application assignments
         "workspace 10, class:(steam)"
         "workspace 1, class:(firefox)"
@@ -108,7 +108,7 @@
         "SUPER, q, killactive"
         "SUPER SHIFT, e, exec, wlogout"
         "SUPER SHIFT, r, exec, hyprctl reload"
-
+        
         # Window management
         "SUPER, h, movefocus, l"
         "SUPER, j, movefocus, d"
@@ -118,7 +118,7 @@
         "SUPER SHIFT, j, movewindow, d"
         "SUPER SHIFT, k, movewindow, u"
         "SUPER SHIFT, l, movewindow, r"
-
+        
         # Layout
         "SUPER, b, togglesplit"
         "SUPER, v, togglesplit"
@@ -129,11 +129,11 @@
         "SUPER, o, movecurrentworkspacetomonitor, +1"
         "SUPER SHIFT, space, togglefloating"
         "SUPER, space, cyclenext"
-
+        
         # Scratchpad (using special workspace)
         "SUPER SHIFT, minus, movetoworkspace, special:scratchpad"
         "SUPER, minus, togglespecialworkspace, scratchpad"
-
+        
         # Workspaces
         "SUPER, 1, workspace, 1"
         "SUPER, 2, workspace, 2"
@@ -155,11 +155,11 @@
         "SUPER SHIFT, 8, movetoworkspace, 8"
         "SUPER SHIFT, 9, movetoworkspace, 9"
         "SUPER SHIFT, 0, movetoworkspace, 10"
-
+        
         # Screenshots
         "SUPER, p, exec, grim -g \"$(slurp)\" - | swappy -f -"
         "SUPER SHIFT, p, exec, grim -g \"$(slurp)\" - | wl-copy"
-
+        
         # Submaps for modes
         "SUPER SHIFT, b, submap, brightness"
         "SUPER SHIFT, v, submap, volume"
@@ -173,46 +173,6 @@
         "SUPER, mouse:273, resizewindow"
       ];
 
-      # Submaps (modes)
-      submap = [
-        # Resize mode
-        "resize"
-        "binde = , h, resizeactive, -10 0"
-        "binde = , j, resizeactive, 0 10"
-        "binde = , k, resizeactive, 0 -10"
-        "binde = , l, resizeactive, 10 0"
-        "bind = , escape, submap, reset"
-        "bind = , return, submap, reset"
-        "submap = reset"
-
-        # Applications mode
-        "applications"
-        "bind = , s, exec, steam"
-        "bind = , d, exec, discord"
-        "bind = , g, exec, godot"
-        "bind = , b, exec, firefox"
-        "bind = , escape, submap, reset"
-        "bind = , return, submap, reset"
-        "submap = reset"
-
-        # Volume mode
-        "volume"
-        "binde = , k, exec, pamixer -i 5"
-        "binde = , j, exec, pamixer -d 5"
-        "bind = , space, exec, pamixer -t"
-        "bind = , escape, submap, reset"
-        "bind = , return, submap, reset"
-        "submap = reset"
-
-        # Brightness mode
-        "brightness"
-        "binde = , k, exec, brightnessctl set 5%+"
-        "binde = , j, exec, brightnessctl set 5%-"
-        "bind = , escape, submap, reset"
-        "bind = , return, submap, reset"
-        "submap = reset"
-      ];
-
       # Startup applications
       exec-once = [
         "nm-applet --indicator"
@@ -222,6 +182,48 @@
         "sleep 3 && steam"
         "hypridle"
       ];
+    };
+  };
+
+  # Define submaps outside of settings
+  wayland.windowManager.hyprland.extraConfig = ''
+    # Resize submap
+    submap = resize
+    binde = , h, resizeactive, -10 0
+    binde = , j, resizeactive, 0 10
+    binde = , k, resizeactive, 0 -10
+    binde = , l, resizeactive, 10 0
+    bind = , escape, submap, reset
+    bind = , return, submap, reset
+    submap = reset
+
+    # Applications submap
+    submap = applications
+    bind = , s, exec, steam
+    bind = , d, exec, discord
+    bind = , g, exec, godot
+    bind = , b, exec, firefox
+    bind = , escape, submap, reset
+    bind = , return, submap, reset
+    submap = reset
+
+    # Volume submap
+    submap = volume
+    binde = , k, exec, pamixer -i 5
+    binde = , j, exec, pamixer -d 5
+    bind = , space, exec, pamixer -t
+    bind = , escape, submap, reset
+    bind = , return, submap, reset
+    submap = reset
+
+    # Brightness submap
+    submap = brightness
+    binde = , k, exec, brightnessctl set 5%+
+    binde = , j, exec, brightnessctl set 5%-
+    bind = , escape, submap, reset
+    bind = , return, submap, reset
+    submap = reset
+  '';
     };
   };
 
@@ -242,7 +244,9 @@
   # Mako notifications
   services.mako = {
     enable = true;
-    defaultTimeout = 5000;
+    settings = {
+      default-timeout = 5000;
+    };
   };
 
   # Screenshot directory
