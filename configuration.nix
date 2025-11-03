@@ -238,5 +238,5 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  stdenv.hostPlatform.system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 }
