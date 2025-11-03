@@ -9,9 +9,6 @@ todo
   add calculator and paint apps
   try out screenshots
   add tray icon for whether swayidle is running or not
-  change swayidle to just dim the screens
-  gtklock doesn't power off displays
   make modules pretty
   fix notifications
-  left display needs to be moved over a couple pixels
-
+  fix file manager in firefox, it wants to work

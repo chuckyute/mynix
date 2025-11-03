@@ -58,7 +58,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- Initialize LSP configuration
-local lspconfig = require("lspconfig")
+local lspconfig = vim.lsp.config
 
 -- Initialize lazydev for Neovim Lua development (safely)
 pcall(function()

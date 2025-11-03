@@ -26,10 +26,11 @@
 
   programs.git = {
     enable = true;
-    userName = "chuckyute";
-    userEmail = "charlieyoung0807@gmail.com";
 
-    extraConfig = {
+    settings = {
+      user.name = "chuckyute";
+      user.email = "charlieyoung0807@gmail.com";
+
       "credential \"https://github.com\"" = {
         helper = "!/usr/bin/env gh auth git-credential";
       };
@@ -65,6 +66,11 @@
 
     # Force hardware acceleration
     LIBGL_ALWAYS_INDIRECT = "0";
+    # Scale all GTK icons
+    GDK_SCALE = "1.2"; # 20% larger icons
+
+    # Scale Qt application icons
+    QT_SCALE_FACTOR = "1.2";
   };
 
   # Let Home Manager install and manage itself.

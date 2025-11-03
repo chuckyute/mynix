@@ -35,15 +35,16 @@
       # Input configuration
       input = {
         kb_layout = "us";
-        follow_mouse = 0;
+        follow_mouse = 2;
       };
 
       # General settings
       general = {
-        gaps_in = 5;
+        gaps_in = 2;
         gaps_out = 0;
         border_size = 2;
-        layout = "dwindle";
+        no_focus_fallback = "true";
+        resize_on_border = "true";
       };
 
       # Decoration
@@ -92,6 +93,7 @@
         "tile, class:(com.mitchellh.ghostty)"
         "tile, class:(firefox)"
         "tile, class:(discord)"
+        "tile, title:(Steam)"
 
         # Application assignments
         "workspace 10, class:(steam)"
@@ -177,7 +179,7 @@
         "waybar"
         "firefox"
         "discord"
-        "sleep 3 && steam"
+        "steam"
         "hypridle"
       ];
     };

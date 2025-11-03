@@ -139,7 +139,7 @@
     iw
     wget
     curl
-    firefox-wayland
+    firefox
     nvidia-vaapi-driver # For hardware video acceleration
   ];
 
@@ -238,5 +238,5 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  system.stateVersion = "25.11"; # Did you read the comment?
+  stdenv.hostPlatform.system.stateVersion = "25.11"; # Did you read the comment?
 }
