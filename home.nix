@@ -35,12 +35,6 @@
     };
   };
 
-  stylix.fonts.sizes = {
-    applications = 18;
-    desktop = 18;
-    popups = 18;
-  };
-
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     XDG_SESSION_TYPE = "wayland";

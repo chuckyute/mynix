@@ -1,5 +1,11 @@
 { ... }:
 {
+  stylix.fonts.sizes = {
+    applications = 18;
+    desktop = 18;
+    popups = 18;
+  };
+
   home.sessionVariables = {
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
