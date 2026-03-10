@@ -1,17 +1,8 @@
+# nixos-common.nix
+# Shared NixOS configuration for all hosts.
+# Host-specific files (GPU, hostname, hardware) live in hosts/<name>/configuration.nix
+{ pkgs, inputs, ... }:
 {
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
-{
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./modules/stylix.nix
-  ];
-
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -23,7 +14,7 @@
         "nix-command"
         "flakes"
       ];
-      # optimise sharing of identical files in store
+      download-buffer-size = 4096;
       auto-optimise-store = true;
     };
 
@@ -44,33 +35,25 @@
     daemonIOSchedClass = "idle";
   };
 
-  # makes it so that sudo permission persists for a while
   security.sudo = {
     enable = true;
-
     extraRules = [
-      # Allow execution of any command by all users in group sudo,
-      # requiring a password.
       {
         groups = [ "wheel" ];
         commands = [ "ALL" ];
       }
     ];
-
     extraConfig = ''
       Defaults timestamp_timeout=60
     '';
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # disable wpa-supplicant since we're using NetworkManager
+  # Wireless managed by NetworkManager; wpa_supplicant disabled
   networking.wireless.enable = false;
 
-  # Enable networking
   networking.networkmanager = {
     enable = true;
     wifi.backend = "iwd";
-
     settings = {
       connection = {
         "ipv6.addr-gen-mode" = "stable-privacy";
@@ -92,7 +75,6 @@
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
-
     publish = {
       enable = true;
       addresses = true;
@@ -104,12 +86,9 @@
   };
 
   services.timesyncd.enable = true;
-  # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -122,7 +101,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.chuck = {
     isNormalUser = true;
     description = "Charles";
@@ -139,12 +117,10 @@
     wget
     curl
     firefox
-    nvidia-vaapi-driver # For hardware video acceleration
   ];
 
   services.displayManager.ly.enable = true;
 
-  # Enable Hyprland (required for session to appear in display manager)
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -165,7 +141,6 @@
     ];
   };
 
-  # audio
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -174,7 +149,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-
     extraConfig.pipewire = {
       "context.properties" = {
         "default.clock.quantum" = 256;
@@ -182,42 +156,22 @@
     };
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
+  # Keymap
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
   };
 
-  # opengl and gpu support
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-
-    nvidia = {
-      modesetting.enable = true;
-      open = false;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
-
-      powerManagement = {
-        enable = true; # Enable for suspend/resume support
-        finegrained = false;
-      };
-    };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
     gamescopeSession.enable = true;
   };
 
@@ -229,13 +183,6 @@
   programs.gamescope.enable = true;
 
   environment.variables = {
-    LIBVA_DRIVER_NAME = "nvidia";
     MOZ_ENABLE_WAYLAND = "1";
-    GBM_BACKEND = "nvidia-drm";
   };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  system.stateVersion = "25.11"; # Did you read the comment?
 }

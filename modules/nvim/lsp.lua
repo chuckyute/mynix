@@ -42,12 +42,11 @@ local on_attach = function(client, bufnr)
 		})
 	end
 	-- Inlay hints (Neovim >= 0.10.0)
+	-- API: enable(bufnr, enable) — bufnr is first argument
 	if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-		-- Enable inlay hints by default
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-		-- Toggle inlay hints with <leader>th
+		vim.lsp.inlay_hint.enable(bufnr, true)
 		bufmap("<leader>th", function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(bufnr), { bufnr = bufnr })
+			vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
 		end, "Toggle Inlay Hints")
 	end
 	-- Display a notification when the LSP attaches
@@ -57,18 +56,13 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
--- Initialize LSP configuration
-local lspconfig = vim.lsp.config
+local lspconfig = require("lspconfig")
 
--- Initialize lazydev for Neovim Lua development (safely)
 pcall(function()
 	require("lazydev").setup({})
 end)
 
--- Set up Lua LSP with the known path
 lspconfig.lua_ls.setup({
-	-- You can just rely on the lua-language-server package from NixOS
-	-- which is already in your PATH thanks to your home.nix configuration
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -80,7 +74,7 @@ lspconfig.lua_ls.setup({
 					"describe",
 					"it",
 					"before_each",
-					"after_each", -- For busted tests
+					"after_each",
 				},
 			},
 			workspace = {
@@ -88,14 +82,13 @@ lspconfig.lua_ls.setup({
 				checkThirdParty = false,
 			},
 			completion = {
-				callSnippet = "Replace", -- Use snippets for function calls
+				callSnippet = "Replace",
 			},
 			telemetry = { enable = false },
 		},
 	},
 })
 
--- Set up Nix LSP
 lspconfig.nixd.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -106,21 +99,19 @@ lspconfig.gdscript.setup({
 	capabilities = capabilities,
 	filetypes = { "gd", "gdscript" },
 	root_dir = require("lspconfig.util").root_pattern("project.godot", ".git"),
-	-- Use OpenBSD netcat to connect to Godot's LSP server
 	cmd = { "nc", "localhost", "6005" },
 })
 
--- Helper command to debug LSP status
+-- Debug: show active LSP clients and their attached buffers
 vim.api.nvim_create_user_command("LspDebug", function()
-	local clients = vim.lsp.get_active_clients()
+	local clients = vim.lsp.get_clients()
 	if #clients == 0 then
 		vim.notify("No active LSP clients", vim.log.levels.WARN)
 	else
 		local msg = "Active LSP clients:\n"
 		for i, client in ipairs(clients) do
-			local buffers = vim.lsp.get_buffers_by_client_id(client.id)
 			local buffer_names = {}
-			for _, buf in ipairs(buffers) do
+			for buf in pairs(client.attached_buffers) do
 				table.insert(buffer_names, vim.api.nvim_buf_get_name(buf))
 			end
 			msg = msg
@@ -136,10 +127,12 @@ vim.api.nvim_create_user_command("LspDebug", function()
 	end
 end, {})
 
--- Additional commands for LSP management
+-- Restart all LSP clients for current buffer
 vim.api.nvim_create_user_command("LspRestart", function()
-	vim.lsp.stop_client(vim.lsp.get_active_clients())
-	vim.cmd("edit") -- Refresh the current buffer
+	for _, client in ipairs(vim.lsp.get_clients()) do
+		client:stop()
+	end
+	vim.cmd("edit")
 end, { desc = "Restart all LSP clients" })
 
 vim.api.nvim_create_user_command("DiagnosticToggle", function()

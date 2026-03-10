@@ -21,7 +21,7 @@ if pcall(require, "gitsigns") then
 			add = { text = "+" },
 			change = { text = "~" },
 			delete = { text = "_" },
-			topdelete = { text = "‾" },
+			topdelete = { text = "â€¾" },
 			changedelete = { text = "~" },
 		},
 	})

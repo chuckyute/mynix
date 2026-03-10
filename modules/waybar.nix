@@ -29,22 +29,22 @@
           "warp-on-scroll" = false;
           "format" = "{name}: {windows}";
           "format-window-separator" = " ";
-          "window-rewrite-default" = "󰣆";
+          "window-rewrite-default" = "ó°£†";
           "window-rewrite" = {
             "class<discord>" = "";
             "class<steam>" = "";
             "title<.*Godot.*>" = "<span size='large'></span>";
-            "title</.*>" = "󰊠";
-            "title<~.*>" = "󰊠";
+            "title</.*>" = "ó°Š ";
+            "title<~.*>" = "ó°Š ";
             "title<neovim>" = "";
             "title<yazi>" = "";
-            "class<com.mitchellh.ghostty>" = "󰊠";
+            "class<com.mitchellh.ghostty>" = "ó°Š ";
             "class<firefox>" = "";
           };
         };
 
         "hyprland/submap" = {
-          "format" = "✌️ {}";
+          "format" = "âœŒï¸ {}";
           "max-length" = 8;
           "tooltip" = false;
         };
@@ -56,7 +56,7 @@
         };
 
         "pulseaudio" = {
-          format = "󰕾 {volume}%";
+          format = "ó°•¾ {volume}%";
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
         };
 

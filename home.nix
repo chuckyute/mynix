@@ -1,20 +1,20 @@
 { pkgs, ... }:
-
 {
   home.username = "chuck";
   home.homeDirectory = "/home/chuck";
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05";
 
   imports = [
     ./modules/ghostty.nix
     ./modules/nvim
-    ./modules/hyprland.nix # Changed from sway.nix to hyprland.nix
+    ./modules/hyprland/default.nix
     ./modules/waybar.nix
     ./modules/scripts.nix
     ./modules/yazi.nix
   ];
 
   fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     nerd-fonts.code-new-roman
     github-cli
@@ -26,53 +26,29 @@
 
   programs.git = {
     enable = true;
-
-    settings = {
-      user.name = "chuckyute";
-      user.email = "charlieyoung0807@gmail.com";
-
-      "credential \"https://github.com\"" = {
-        helper = "!/usr/bin/env gh auth git-credential";
-      };
-      "credential \"https://gist.github.com\"" = {
-        helper = "!/usr/bin/env gh auth git-credential";
-      };
+    userName = "chuckyute";
+    userEmail = "charlieyoung0807@gmail.com";
+    extraConfig = {
+      "credential \"https://github.com\"".helper = "!/usr/bin/env gh auth git-credential";
+      "credential \"https://gist.github.com\"".helper = "!/usr/bin/env gh auth git-credential";
       core.editor = "nvim";
     };
   };
 
-  stylix = {
-
-    fonts = {
-      sizes = {
-        applications = 18;
-        desktop = 18;
-        popups = 18;
-      };
-    };
+  stylix.fonts.sizes = {
+    applications = 18;
+    desktop = 18;
+    popups = 18;
   };
 
   home.sessionVariables = {
-    # Force Wayland for Chrome
     NIXOS_OZONE_WL = "1";
     XDG_SESSION_TYPE = "wayland";
-
-    # NVIDIA specific
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-
-    # Disable problematic compositor features
     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
-
-    # Force hardware acceleration
     LIBGL_ALWAYS_INDIRECT = "0";
-    # Scale all GTK icons
-    GDK_SCALE = "1.2"; # 20% larger icons
-
-    # Scale Qt application icons
+    GDK_SCALE = "1.2";
     QT_SCALE_FACTOR = "1.2";
   };
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

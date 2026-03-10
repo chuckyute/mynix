@@ -18,33 +18,49 @@
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
     { nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
+
+      # hostModule is the host-specific hyprland module passed as an extra import
+      hmModule = hostModule: {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = {
+          inherit inputs;
+          stylix = inputs.stylix;
+        };
+        home-manager.users.chuck = {
+          imports = [ ./home.nix hostModule ];
+        };
+      };
+
+      sharedModules = [
+        inputs.stylix.nixosModules.stylix
+        inputs.hyprland.nixosModules.default
+        inputs.home-manager.nixosModules.home-manager
+      ];
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs system;
-          };
-          modules = [
-            ./configuration.nix
-            inputs.stylix.nixosModules.stylix
-            inputs.hyprland.nixosModules.default
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                stylix = inputs.stylix;
-              };
-              home-manager.users.chuck = import ./home.nix;
-            }
+        nixdesktop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs system; };
+          modules = sharedModules ++ [
+            ./hosts/nixdesktop/configuration.nix
+            (hmModule ./modules/hyprland/nixdesktop.nix)
+          ];
+        };
+
+        nixframe = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs system; };
+          modules = sharedModules ++ [
+            ./hosts/nixframe/configuration.nix
+            (hmModule ./modules/hyprland/nixframe.nix)
           ];
         };
       };

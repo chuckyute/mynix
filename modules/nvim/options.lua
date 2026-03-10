@@ -14,7 +14,7 @@ vim.opt.showmode = false
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "Â» ", trail = "Â·", nbsp = "â£" }
 
 -- Editing preferences
 vim.o.tabstop = 4
