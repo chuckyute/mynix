@@ -1,16 +1,16 @@
 { ... }:
 {
   stylix.fonts.sizes = {
-    applications = 14;
-    desktop = 14;
-    popups = 14;
+    applications = 8;
+    desktop = 8;
+    popups = 8;
   };
 
-  programs.ghostty.settings.font-size = 14;
+  programs.ghostty.settings.font-size = 8;
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "eDP-2, 2560x1600@165, 0x0, 1.6"
+      "eDP-2, 2560x1600@165, 0x0, 2.0"
       ", preferred, auto, 1"
     ];
 
