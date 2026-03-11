@@ -3,8 +3,10 @@
   stylix.fonts.sizes = {
     applications = 14;
     desktop = 14;
-    popups = 4;
+    popups = 14;
   };
+
+  programs.ghostty.settings.font-size = 14;
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
@@ -13,16 +15,16 @@
     ];
 
     workspace = [
-      "1, monitor:eDP-1, default:true"
-      "2, monitor:eDP-1"
-      "3, monitor:eDP-1"
-      "4, monitor:eDP-1"
-      "5, monitor:eDP-1"
-      "6, monitor:eDP-1"
-      "7, monitor:eDP-1"
-      "8, monitor:eDP-1"
-      "9, monitor:eDP-1"
-      "10, monitor:eDP-1"
+      "1, monitor:eDP-2, default:true"
+      "2, monitor:eDP-2"
+      "3, monitor:eDP-2"
+      "4, monitor:eDP-2"
+      "5, monitor:eDP-2"
+      "6, monitor:eDP-2"
+      "7, monitor:eDP-2"
+      "8, monitor:eDP-2"
+      "9, monitor:eDP-2"
+      "10, monitor:eDP-2"
     ];
 
     exec-once = [
