@@ -1,9 +1,9 @@
 { ... }:
 {
   stylix.fonts.sizes = {
-    applications = 8;
-    desktop = 8;
-    popups = 8;
+    applications = 14;
+    desktop = 14;
+    popups = 14;
   };
 
   programs.ghostty.settings.font-size = 8;
