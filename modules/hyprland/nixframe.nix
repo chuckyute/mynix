@@ -1,14 +1,14 @@
 { ... }:
 {
   stylix.fonts.sizes = {
-    applications = 22;
-    desktop = 22;
-    popups = 22;
+    applications = 16;
+    desktop = 16;
+    popups = 16;
   };
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "eDP-1, 2560x1600@165, 0x0, 2.0"
+      "eDP-2, 2560x1600@165, 0x0, 1.6"
       ", preferred, auto, 1"
     ];
 
