@@ -1,16 +1,16 @@
-{ ... }:
+{ lib, ... }:
 {
   stylix.fonts.sizes = {
-    applications = 14;
-    desktop = 14;
-    popups = 14;
+    applications = 22;
+    desktop = 22;
+    popups = 22;
   };
 
-  programs.ghostty.settings.font-size = 14;
+  programs.ghostty.settings.font-size = 16;
 
   home.sessionVariables = {
-    GDK_SCALE = "1.5";
-    QT_SCALE_FACTOR = "1.5";
+    GDK_SCALE = lib.mkForce "1.5";
+    QT_SCALE_FACTOR = lib.mkForce "1.5";
   };
 
   wayland.windowManager.hyprland.settings = {
