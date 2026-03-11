@@ -8,14 +8,9 @@
 
   programs.ghostty.settings.font-size = 14;
 
-  #  home.sessionVariables = {
-  #    GDK_SCALE = lib.mkForce "1.5";
-  #    QT_SCALE_FACTOR = lib.mkForce "1.5";
-  #  };
-
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "eDP-2, 2560x1600@165, 0x0, 2.0"
+      "eDP-2, 2560x1600@165, 0x0, 1.0"
       ", preferred, auto, 1"
     ];
 
