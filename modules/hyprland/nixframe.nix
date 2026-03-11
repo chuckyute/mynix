@@ -1,12 +1,12 @@
 { lib, ... }:
 {
   stylix.fonts.sizes = {
-    applications = 14;
-    desktop = 14;
-    popups = 14;
+    applications = 22;
+    desktop = 22;
+    popups = 22;
   };
 
-  programs.ghostty.settings.font-size = 14;
+  programs.ghostty.settings.font-size = 22;
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
