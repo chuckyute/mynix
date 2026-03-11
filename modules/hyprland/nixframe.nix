@@ -1,12 +1,12 @@
 { lib, ... }:
 {
   stylix.fonts.sizes = {
-    applications = 22;
-    desktop = 22;
-    popups = 22;
+    applications = 14;
+    desktop = 14;
+    popups = 14;
   };
 
-  programs.ghostty.settings.font-size = 16;
+  programs.ghostty.settings.font-size = 14;
 
   home.sessionVariables = {
     GDK_SCALE = lib.mkForce "1.5";
