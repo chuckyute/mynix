@@ -1,8 +1,8 @@
 { ... }:
 {
   stylix.fonts.sizes = {
-    applications = 12;
-    desktop = 4;
+    applications = 4;
+    desktop = 14;
     popups = 12;
   };
 
