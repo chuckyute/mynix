@@ -44,9 +44,9 @@ local on_attach = function(client, bufnr)
 	-- Inlay hints (Neovim >= 0.10.0)
 	-- API: enable(bufnr, enable) — bufnr is first argument
 	if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-		vim.lsp.inlay_hint.enable(bufnr, true)
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 		bufmap("<leader>th", function()
-			vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
 		end, "Toggle Inlay Hints")
 	end
 	-- Display a notification when the LSP attaches
