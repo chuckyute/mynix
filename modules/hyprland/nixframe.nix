@@ -1,9 +1,9 @@
 { ... }:
 {
   stylix.fonts.sizes = {
-    applications = 4;
+    applications = 14;
     desktop = 14;
-    popups = 12;
+    popups = 4;
   };
 
   wayland.windowManager.hyprland.settings = {
