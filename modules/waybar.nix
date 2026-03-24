@@ -21,6 +21,7 @@
           "pulseaudio"
           "clock"
           "tray"
+          "battery"
         ];
 
         "hyprland/workspaces" = {
@@ -69,6 +70,30 @@
           spacing = 10;
           icon-size = 20;
           show-passive-items = true;
+        };
+
+        "battery" = {
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+
+          format = "{icon} {capacity}%";
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "󰚥 {capacity}%";
+          format-icons = [
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
+          tooltip-format = "{timeTo}, {power}W";
         };
       };
     };
