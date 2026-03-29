@@ -38,15 +38,16 @@
       dwindle.preserve_split = true;
       misc = { vfr = true; disable_hyprland_logo = true; };
 
-      windowrulev2 = [
-        "float, class:.*"
-        "tile, class:(com.mitchellh.ghostty)"
-        "tile, class:(firefox)"
-        "tile, class:(discord)"
-        "tile, title:(Steam)"
-        "workspace 10, class:(steam)"
-        "workspace 1, class:(firefox)"
-        "workspace 2, class:(discord)"
+      # v3 windowrule syntax (replaces deprecated windowrulev2)
+      windowrule = [
+        "match:class .*, float on"
+        "match:class com.mitchellh.ghostty, tile on"
+        "match:class firefox, tile on"
+        "match:class discord, tile on"
+        "match:title Steam, tile on"
+        "match:class steam, workspace 10"
+        "match:class firefox, workspace 1"
+        "match:class discord, workspace 2"
       ];
 
       bind = [
@@ -63,11 +64,12 @@
         "SUPER SHIFT, k, movewindow, u"
         "SUPER SHIFT, l, movewindow, r"
 
-        "SUPER, b, togglesplit"
-        "SUPER, v, togglesplit"
-        "SUPER, s, pseudo"
-        "SUPER, w, pseudo"
-        "SUPER, e, togglesplit"
+        # togglesplit and pseudo moved behind layoutmsg in v0.54
+        "SUPER, b, layoutmsg, togglesplit"
+        "SUPER, v, layoutmsg, togglesplit"
+        "SUPER, s, layoutmsg, pseudo"
+        "SUPER, w, layoutmsg, pseudo"
+        "SUPER, e, layoutmsg, togglesplit"
         "SUPER, f, fullscreen, 0"
         "SUPER, o, movecurrentworkspacetomonitor, +1"
         "SUPER SHIFT, space, togglefloating"
