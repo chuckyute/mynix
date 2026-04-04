@@ -10,16 +10,30 @@ A NixOS flake managing two machines for user `chuck`:
 
 ## Key commands
 
-There are custom scripts in `modules/scripts.nix` for day-to-day use:
-
-- `rebuild` — commits any uncommitted changes, runs `nixos-rebuild switch` for the current host (auto-detected via `hostname`), then pushes
-- `update` — runs `nix flake update` then `nixos-rebuild switch`
-- `build` — pulls latest from GitHub and runs `nixos-rebuild build` (no switch, no commit)
-- `clean` — runs garbage collection and store cleanup
-
-Use `rebuild` as the normal workflow after making changes. Direct `nixos-rebuild` calls are only needed for dry-run checks:
+Rebuild and switch the current host:
 ```bash
-nixos-rebuild dry-build --flake .#nixframe
+sudo nixos-rebuild switch --flake .#nixdesktop
+sudo nixos-rebuild switch --flake .#nixframe
+```
+
+Test a build without switching (dry run):
+```bash
+nixos-rebuild dry-build --flake .#nixdesktop
+```
+
+Update flake inputs:
+```bash
+nix flake update
+```
+
+Check flake for errors:
+```bash
+nix flake check
+```
+
+Format nix files (if alejandra or nixfmt is available):
+```bash
+nix fmt
 ```
 
 ## Architecture
