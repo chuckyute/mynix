@@ -22,6 +22,7 @@
     godot
     vlc
     unzip
+    claude-code
   ];
 
   programs.git = {
