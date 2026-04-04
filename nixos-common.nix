@@ -53,7 +53,6 @@
 
   networking.networkmanager = {
     enable = true;
-    wifi.backend = "iwd";
     settings = {
       connection = {
         "ipv6.addr-gen-mode" = "stable-privacy";
