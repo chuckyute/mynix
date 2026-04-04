@@ -22,7 +22,6 @@
     godot
     vlc
     unzip
-    claude-code
     inputs.claude-code.packages.${pkgs.system}.claude-code
   ];
 
