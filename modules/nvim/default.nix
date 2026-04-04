@@ -43,7 +43,8 @@
         type = "lua";
         config = builtins.readFile ./cmp.lua;
       }
-      # lsp plugins
+      # lsp plugins (nvim-lspconfig provides server registry files,
+      # but we no longer call require('lspconfig') — see lsp.lua)
       fidget-nvim
       lazydev-nvim
       {
