@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.username = "chuck";
   home.homeDirectory = "/home/chuck";
@@ -23,6 +23,7 @@
     vlc
     unzip
     claude-code
+    inputs.claude-code.packages.${pkgs.system}.claude-code
   ];
 
   programs.git = {
