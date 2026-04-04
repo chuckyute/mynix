@@ -25,8 +25,6 @@
   outputs =
     { nixpkgs, ... }@inputs:
     let
-      system = "x86_64-linux";
-
       # hostModule is the host-specific hyprland module passed as an extra import
       hmModule = hostModule: {
         home-manager.useGlobalPkgs = true;
@@ -49,7 +47,7 @@
     {
       nixosConfigurations = {
         nixdesktop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs system; };
+          specialArgs = { inherit inputs; };
           modules = sharedModules ++ [
             ./hosts/nixdesktop/configuration.nix
             (hmModule ./modules/hyprland/nixdesktop.nix)
@@ -57,7 +55,7 @@
         };
 
         nixframe = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs system; };
+          specialArgs = { inherit inputs; };
           modules = sharedModules ++ [
             ./hosts/nixframe/configuration.nix
             (hmModule ./modules/hyprland/nixframe.nix)

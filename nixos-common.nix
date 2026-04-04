@@ -14,7 +14,7 @@
         "nix-command"
         "flakes"
       ];
-      download-buffer-size = 4096;
+      download-buffer-size = 134217728;
       auto-optimise-store = true;
     };
 

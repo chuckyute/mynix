@@ -10,7 +10,7 @@
       nixd
       wl-clipboard
       stylua
-      nixfmt-rfc-style
+      nixfmt
     ];
     plugins = with pkgs.vimPlugins; [
       comment-nvim
@@ -71,7 +71,7 @@
         config = builtins.readFile ./format.lua;
       }
     ];
-    extraLuaConfig = ''
+    initLua = ''
       ${builtins.readFile ./options.lua}
       ${builtins.readFile ./plugins.lua}
     '';

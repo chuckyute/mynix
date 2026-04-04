@@ -25,6 +25,8 @@
     driversi686Linux.mesa
   ];
 
+  hardware.amdgpu.overdrive.enable = true;
+
   services.fprintd.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -33,10 +35,7 @@
     radeontop
   ];
 
-  programs.corectrl = {
-    enable = true;
-    gpuOverclock.enable = true;
-  };
+  programs.corectrl.enable = true;
 
   system.stateVersion = "25.05";
 }

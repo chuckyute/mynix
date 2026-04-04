@@ -26,14 +26,16 @@
 
   programs.git = {
     enable = true;
-    userName = "chuckyute";
-    userEmail = "charlieyoung0807@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "chuckyute";
+      user.email = "charlieyoung0807@gmail.com";
       "credential \"https://github.com\"".helper = "!/usr/bin/env gh auth git-credential";
       "credential \"https://gist.github.com\"".helper = "!/usr/bin/env gh auth git-credential";
       core.editor = "nvim";
     };
   };
+
+  gtk.gtk4.theme = null;
 
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
