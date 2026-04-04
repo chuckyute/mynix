@@ -48,9 +48,6 @@
     '';
   };
 
-  # Wireless managed by NetworkManager; wpa_supplicant disabled
-  networking.wireless.enable = false;
-
   networking.networkmanager = {
     enable = true;
     settings = {
