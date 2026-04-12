@@ -36,7 +36,7 @@
 
       animations.enabled = false;
       dwindle.preserve_split = true;
-      misc = { vfr = true; disable_hyprland_logo = true; };
+      misc = { disable_hyprland_logo = true; };
 
       # v3 windowrule syntax (replaces deprecated windowrulev2)
       windowrule = [
