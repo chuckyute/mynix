@@ -4,7 +4,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos-common.nix
+    ../../common.nix
     ../../modules/stylix.nix
     inputs.nixos-hardware.nixosModules.framework-16-amd-ai-300-series
   ];

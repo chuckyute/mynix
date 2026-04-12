@@ -4,7 +4,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos-common.nix
+    ../../common.nix
     ../../modules/stylix.nix
   ];
 

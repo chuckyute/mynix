@@ -40,7 +40,7 @@ nix fmt
 
 ```
 flake.nix              # Entry point; defines both nixosConfigurations
-nixos-common.nix       # Shared NixOS config for all hosts (boot, networking, audio, steam, etc.)
+common.nix             # Shared NixOS config for all hosts (boot, networking, audio, steam, etc.)
 home.nix               # Shared home-manager config for chuck (packages, git, session vars)
 hosts/
   nixdesktop/          # NVIDIA-specific config + hardware-configuration.nix
@@ -62,7 +62,7 @@ modules/
 
 `flake.nix` builds each host by combining:
 1. `sharedModules` — stylix, hyprland nixos module, home-manager nixos module
-2. `hosts/<name>/configuration.nix` — imports `nixos-common.nix`, `modules/stylix.nix`, and hardware config
+2. `hosts/<name>/configuration.nix` — imports `common.nix`, `modules/stylix.nix`, and hardware config
 3. A host-specific Hyprland home-manager module (`modules/hyprland/<name>.nix`) passed via `hmModule`
 
 Home-manager runs as a NixOS module (`useGlobalPkgs = true`, `useUserPackages = true`). The shared `home.nix` is always imported; the host-specific Hyprland module is added on top.
