@@ -388,7 +388,7 @@
         }
         {
           on = [ "?" ];
-          run = "help";
+          run = "which --global";
           desc = "Show help";
         }
       ];
