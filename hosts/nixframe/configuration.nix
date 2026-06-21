@@ -11,6 +11,12 @@
 
   networking.hostName = "nixframe";
 
+  # MediaTek MT7925 WiFi drops out due to aggressive power saving
+  networking.networkmanager.wifi.powersave = false;
+
+  # amdgpu scatter-gather display causes GPU hangs under video decode (Discord streams, etc.)
+  boot.kernelParams = [ "amdgpu.sg_display=0" ];
+
   services.xserver = {
     enable = true;
     videoDrivers = [ "amdgpu" ];
