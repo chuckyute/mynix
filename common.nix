@@ -16,6 +16,15 @@
       ];
       download-buffer-size = 134217728;
       auto-optimise-store = true;
+      max-jobs = "auto";
+      substituters = [
+        "https://cache.nixos.org"
+        "https://hyprland.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      ];
     };
 
     gc = {
@@ -71,7 +80,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
     config.common.default = [
@@ -141,7 +150,7 @@
     };
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       xwayland.enable = true;
     };
   };

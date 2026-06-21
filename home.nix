@@ -22,7 +22,7 @@
     godot
     vlc
     unzip
-    inputs.claude-code.packages.${pkgs.system}.claude-code
+    inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
   ];
 
   programs.git = {
