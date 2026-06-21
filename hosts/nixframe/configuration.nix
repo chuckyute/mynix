@@ -15,7 +15,8 @@
   networking.networkmanager.wifi.powersave = false;
 
   # amdgpu scatter-gather display causes GPU hangs under video decode (Discord streams, etc.)
-  boot.kernelParams = [ "amdgpu.sg_display=0" ];
+  # mt7925e ASPM-related firmware timeouts cause IOMMU page faults that can hang the system
+  boot.kernelParams = [ "amdgpu.sg_display=0" "mt7925e.disable_aspm=1" ];
 
   services.xserver = {
     enable = true;
