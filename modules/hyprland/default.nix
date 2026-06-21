@@ -10,6 +10,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     systemd.enable = true;
     xwayland.enable = true;
+    configType = "hyprlang";
 
     settings = {
       env = [
