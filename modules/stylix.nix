@@ -9,7 +9,7 @@
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.code-new-roman;
-        name = "CodeNewRoman Nerd Font";
+        name = "CodeNewRoman Nerd Font Mono";
       };
 
       sansSerif = {

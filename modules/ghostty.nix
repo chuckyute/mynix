@@ -5,7 +5,7 @@
     enableBashIntegration = true;
 
     settings = {
-      font-family = "CodeNewRoman Nerd Font";
+      font-family = "CodeNewRoman Nerd Font Mono";
       font-size = 19;
     };
   };
