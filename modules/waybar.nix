@@ -30,22 +30,22 @@
           "warp-on-scroll" = false;
           "format" = "{name}: {windows}";
           "format-window-separator" = " ";
-          "window-rewrite-default" = "ó°£†";
+          "window-rewrite-default" = "";
           "window-rewrite" = {
-            "class<discord>" = "";
-            "class<steam>" = "";
-            "title<.*Godot.*>" = "<span size='large'></span>";
-            "title</.*>" = "ó°Š ";
-            "title<~.*>" = "ó°Š ";
-            "title<neovim>" = "";
-            "title<yazi>" = "";
-            "class<com.mitchellh.ghostty>" = "ó°Š ";
-            "class<firefox>" = "";
+            "class<discord>" = "";
+            "class<steam>" = "";
+            "title<.*Godot.*>" = "";
+            "title</.*>" = "󰊠";
+            "title<~.*>" = "󰊠";
+            "title<neovim>" = "";
+            "title<yazi>" = "";
+            "class<com.mitchellh.ghostty>" = "󰊠";
+            "class<firefox>" = "";
           };
         };
 
         "hyprland/submap" = {
-          "format" = "âœŒï¸ {}";
+          "format" = "apps {}";
           "max-length" = 8;
           "tooltip" = false;
         };
