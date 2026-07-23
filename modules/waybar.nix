@@ -86,9 +86,9 @@
             critical = 15;
           };
 
-          format = "<span size='large'>{icon}</span> {capacity}%";
-          format-charging = "<span size='large'>󰂄</span> {capacity}%";
-          format-plugged = "<span size='large'>󰚥</span> {capacity}%";
+          format = "{icon} {capacity}%";
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "󰚥 {capacity}%";
           format-icons = [
             "󰁺"
             "󰁻"
