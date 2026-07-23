@@ -30,7 +30,7 @@
           "warp-on-scroll" = false;
           "format" = "{name}: {windows}";
           "format-window-separator" = " ";
-          "window-rewrite-default" = "";
+          "window-rewrite-default" = "";
           "window-rewrite" = {
             "class<discord>" = "";
             "class<steam>" = "";
@@ -45,7 +45,7 @@
         };
 
         "hyprland/submap" = {
-          "format" = "apps {}";
+          "format" = "{}";
           "max-length" = 8;
           "tooltip" = false;
         };
@@ -57,7 +57,15 @@
         };
 
         "pulseaudio" = {
-          format = "ó°•¾ {volume}%";
+          format = "{icon} {volume}%";
+          format-muted = " {volume}%";
+          format-icons = {
+            default = [
+              ""
+              ""
+              ""
+            ];
+          };
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
         };
 
