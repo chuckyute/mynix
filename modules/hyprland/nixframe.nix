@@ -6,7 +6,7 @@
     popups = 22;
   };
 
-  programs.ghostty.settings.font-size = 20;
+  programs.ghostty.settings.font-size = 19;
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
