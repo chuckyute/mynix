@@ -28,7 +28,7 @@
           "disable-scroll" = true;
           "all-outputs" = false;
           "warp-on-scroll" = false;
-          "format" = "{name}: {windows}";
+          "format" = "{name}: <span size='large'>{windows}</span>";
           "format-window-separator" = " ";
           "window-rewrite-default" = "";
           "window-rewrite" = {
@@ -57,8 +57,8 @@
         };
 
         "pulseaudio" = {
-          format = "{icon} {volume}%";
-          format-muted = " {volume}%";
+          format = "<span size='large'>{icon}</span> {volume}%";
+          format-muted = "<span size='large'></span> {volume}%";
           format-icons = {
             default = [
               ""
@@ -86,9 +86,9 @@
             critical = 15;
           };
 
-          format = "{icon} {capacity}%";
-          format-charging = "󰂄 {capacity}%";
-          format-plugged = "󰚥 {capacity}%";
+          format = "<span size='large'>{icon}</span> {capacity}%";
+          format-charging = "<span size='large'>󰂄</span> {capacity}%";
+          format-plugged = "<span size='large'>󰚥</span> {capacity}%";
           format-icons = [
             "󰁺"
             "󰁻"
