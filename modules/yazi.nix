@@ -28,10 +28,12 @@
         ];
       };
       # Archive extraction uses Yazi's built-in extractor (`ya pub extract`), configured
-      # via opener.extract by default. These just add name-based fallback matching on
-      # top of the default mime-based archive rules, in case mime detection misses.
+      # via opener.extract by default. Yazi's own default archive rule maps to
+      # `use = [ "extract", "reveal" ]`, which pops up a picker since there are two
+      # openers. These prepend_rules take priority (first match wins) and only offer
+      # "extract" so Enter extracts immediately with no prompt.
       open = {
-        append_rules = [
+        prepend_rules = [
           {
             name = "*.zip";
             use = [ "extract" ];
