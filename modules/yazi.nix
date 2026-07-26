@@ -35,27 +35,27 @@
       open = {
         prepend_rules = [
           {
-            name = "*.zip";
+            url = "*.zip";
             use = [ "extract" ];
           }
           {
-            name = "*.tar.gz";
+            url = "*.tar.gz";
             use = [ "extract" ];
           }
           {
-            name = "*.tgz";
+            url = "*.tgz";
             use = [ "extract" ];
           }
           {
-            name = "*.tar.xz";
+            url = "*.tar.xz";
             use = [ "extract" ];
           }
           {
-            name = "*.7z";
+            url = "*.7z";
             use = [ "extract" ];
           }
           {
-            name = "*.rar";
+            url = "*.rar";
             use = [ "extract" ];
           }
         ];
