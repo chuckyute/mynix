@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    unar
+    p7zip
   ];
 
   programs.yazi = {
@@ -21,45 +21,17 @@
       opener = {
         edit = [
           {
-            run = "nvim \"$@\"";
+            run = "nvim %s";
             block = true;
             desc = "Edit with nvim";
           }
         ];
-
-        extract = [
-          {
-            run = "unar \"$@\"";
-            desc = "Extract archive";
-          }
-        ];
       };
-      # File association rules - this is the key part
+      # Archive extraction uses Yazi's built-in extractor (`ya pub extract`), configured
+      # via opener.extract by default. These just add name-based fallback matching on
+      # top of the default mime-based archive rules, in case mime detection misses.
       open = {
-        rules = [
-          # Archive files use extract workflow when pressing Enter
-          {
-            mime = "application/zip";
-            use = [ "extract" ];
-          }
-          {
-            mime = "application/gzip";
-            use = [ "extract" ];
-          }
-          {
-            mime = "application/x-tar";
-            use = [ "extract" ];
-          }
-          {
-            mime = "application/x-7z-compressed";
-            use = [ "extract" ];
-          }
-          {
-            mime = "application/x-rar";
-            use = [ "extract" ];
-          }
-
-          # Pattern-based matching (more reliable than MIME)
+        append_rules = [
           {
             name = "*.zip";
             use = [ "extract" ];
