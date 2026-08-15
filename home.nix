@@ -15,6 +15,8 @@
 
   fonts.fontconfig.enable = true;
 
+  home.pointerCursor.enable = true;
+
   home.packages = with pkgs; [
     nerd-fonts.code-new-roman
     github-cli
