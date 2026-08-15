@@ -131,6 +131,10 @@
         workstation = true;
       };
     };
+
+    udev.extraRules = ''
+      KERNEL=="hidraw*", ATTRS{idVendor}=="5043", ATTRS{idProduct}=="5442", TAG+="uaccess"
+    '';
   };
 
   programs = {

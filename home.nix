@@ -22,6 +22,7 @@
     godot
     vlc
     unzip
+    via
     inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
     pinta
   ];
