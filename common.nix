@@ -75,6 +75,8 @@
     wget
     curl
     firefox
+    zip
+    unzip
   ];
 
   xdg.portal = {
