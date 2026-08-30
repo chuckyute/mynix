@@ -174,6 +174,14 @@
           run = "rename";
           desc = "Rename file";
         }
+        {
+          on = [
+            "c"
+            "z"
+          ];
+          run = ''shell 'zip -r "archive_$(date +%Y%m%d_%H%M%S).zip" "$@"' --confirm'';
+          desc = "Zip selected files";
+        }
         # Vim-like yank operations
         {
           on = [
