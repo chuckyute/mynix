@@ -10,57 +10,40 @@
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "eDP-2, 2560x1600@165, 0x0, 1.0"
-      ", preferred, auto, 1"
+      { output = "eDP-2"; mode = "2560x1600@165"; position = "0x0"; scale = 1.0; }
+      { output = ""; mode = "preferred"; position = "auto"; scale = 1; }
     ];
 
-    workspace = [
-      "1, monitor:eDP-2, default:true"
-      "2, monitor:eDP-2"
-      "3, monitor:eDP-2"
-      "4, monitor:eDP-2"
-      "5, monitor:eDP-2"
-      "6, monitor:eDP-2"
-      "7, monitor:eDP-2"
-      "8, monitor:eDP-2"
-      "9, monitor:eDP-2"
-      "10, monitor:eDP-2"
-    ];
-
-    exec-once = [
-      "nm-applet --indicator"
-      "waybar"
-      "firefox"
-      "discord"
-      "sleep 3 && steam"
-      "hypridle"
-    ];
-
-    bind = [
-      "SUPER, t, exec, ghostty -e bash"
-      ", XF86AudioMute, exec, pamixer -t"
-    ];
-
-    binde = [
-      ", XF86AudioLowerVolume, exec, pamixer -d 5"
-      ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-      ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-      ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-    ];
+    workspace_rule =
+      [ { workspace = "1"; monitor = "eDP-2"; default = true; } ]
+      ++ map (ws: { workspace = toString ws; monitor = "eDP-2"; }) [ 2 3 4 5 6 7 8 9 10 ];
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
-    submap = applications
-    bind = , s, exec, steam
-    bind = , s, submap, reset
-    bind = , d, exec, discord
-    bind = , d, submap, reset
-    bind = , g, exec, godot
-    bind = , g, submap, reset
-    bind = , b, exec, firefox
-    bind = , b, submap, reset
-    bind = , escape, submap, reset
-    bind = , return, submap, reset
-    submap = reset
+    hl.on("hyprland.start", function()
+      hl.exec_cmd("nm-applet --indicator")
+      hl.exec_cmd("waybar")
+      hl.exec_cmd("firefox")
+      hl.exec_cmd("discord")
+      hl.exec_cmd("sleep 3 && steam")
+      hl.exec_cmd("hypridle")
+    end)
+
+    hl.bind("SUPER + t", hl.dsp.exec_cmd("ghostty -e bash"))
+    hl.bind("XF86AudioMute", hl.dsp.exec_cmd("pamixer -t"))
+    hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pamixer -d 5"), { repeating = true })
+    hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pamixer -i 5"), { repeating = true })
+    hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { repeating = true })
+    hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"), { repeating = true })
+
+    -- "reset": leave the submap after any bind fires
+    hl.define_submap("applications", "reset", function()
+      hl.bind("s", hl.dsp.exec_cmd("steam"))
+      hl.bind("d", hl.dsp.exec_cmd("discord"))
+      hl.bind("g", hl.dsp.exec_cmd("godot"))
+      hl.bind("b", hl.dsp.exec_cmd("firefox"))
+      hl.bind("escape", hl.dsp.submap("reset"))
+      hl.bind("return", hl.dsp.submap("reset"))
+    end)
   '';
 }
